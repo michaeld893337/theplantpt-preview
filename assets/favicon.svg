@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="15" fill="#222a15"/>
+  <!-- leaf -->
+  <path d="M44 14s2 6 2 12c0 12-6 22-18 25-5-9-4-19 3-26 6-6 13-11 13-11z" fill="#a7cf6a"/>
+  <path d="M40 19c-7 4-13 9-17 15" stroke="#222a15" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+  <!-- spark / clay accent -->
+  <circle cx="20" cy="22" r="5.5" fill="#c95a30"/>
+</svg>
