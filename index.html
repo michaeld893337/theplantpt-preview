@@ -174,7 +174,7 @@
 
       <a href="#coaching" class="hero__scroll" aria-label="Scroll to coaching">
         <span>Scroll</span>
-        <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 5v14M6 13l6 6 6-6" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
     </section>
 
@@ -448,13 +448,14 @@
           <p class="eyebrow"><span class="eyebrow__no">✦</span> Free guide</p>
           <h2 class="section__title">Get the free Plant-Strong Starter.</h2>
           <p>A simple 7-day kickstart — training plus plant-based nutrition basics to get you moving. Straight to your inbox, no spam.</p>
-          <form class="lead-form" data-lead-form novalidate>
+          <form class="lead-form" id="lead-form" data-lead-form novalidate>
             <input type="email" name="email" placeholder="you@email.com" aria-label="Your email address" required />
             <button type="submit" class="btn btn--accent">Send it to me</button>
             <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
           </form>
           <label class="consent">
-            <input type="checkbox" name="consent" required />
+            <!-- lives outside the <form> tag for layout; form="" keeps it part of the form -->
+            <input type="checkbox" name="consent" form="lead-form" required />
             <span>Email me the free guide &amp; occasional plant-powered tips — unsubscribe anytime.</span>
           </label>
           <p class="lead-form__note" data-lead-note role="status" aria-live="polite">Free download · No spam, ever.</p>
@@ -583,7 +584,7 @@
                   <span class="codeblock__label">My code</span>
                   <span class="codeblock__code" data-code>VPRO20</span>
                 </div>
-                <button class="codeblock__btn" data-copy="VPRO20" type="button">Copy</button>
+                <button class="codeblock__btn" data-copy="VPRO20" type="button" aria-live="polite">Copy</button>
               </div>
               <a href="https://www.vivobarefoot.com" target="_blank" rel="noopener sponsored" class="affiliate__link">Shop Vivobarefoot <span aria-hidden="true">→</span></a>
             </div>
@@ -599,7 +600,7 @@
                   <span class="codeblock__label">My code</span>
                   <span class="codeblock__code" data-code>PLANTPT</span>
                 </div>
-                <button class="codeblock__btn" data-copy="PLANTPT" type="button">Copy</button>
+                <button class="codeblock__btn" data-copy="PLANTPT" type="button" aria-live="polite">Copy</button>
               </div>
               <a href="https://spartanprotein.co.uk" target="_blank" rel="noopener sponsored" class="affiliate__link">Shop Spartan Protein <span aria-hidden="true">→</span></a>
             </div>
@@ -689,21 +690,21 @@
             <!-- NOTE: replace the href values with Joe's real details (see README) -->
             <!-- WhatsApp hidden until Joe provides a real number — restore with his real wa.me link:
             <a class="channel" href="https://wa.me/440000000000" target="_blank" rel="noopener" data-channel="whatsapp">
-              <span class="channel__icon">💬</span>
+              <span class="channel__icon" aria-hidden="true">💬</span>
               <span><span class="channel__label">WhatsApp</span><span class="channel__val">Message Joe directly</span></span>
             </a>
             -->
             <a class="channel" href="https://www.instagram.com/the_plant_pt/" target="_blank" rel="noopener" data-channel="instagram">
-              <span class="channel__icon">📸</span>
+              <span class="channel__icon" aria-hidden="true">📸</span>
               <span><span class="channel__label">Instagram DM</span><span class="channel__val">@the_plant_pt</span></span>
             </a>
             <a class="channel" href="mailto:hello@plantpt.co.uk" data-channel="email">
-              <span class="channel__icon">✉️</span>
+              <span class="channel__icon" aria-hidden="true">✉️</span>
               <span><span class="channel__label">Email</span><span class="channel__val">hello@plantpt.co.uk</span></span>
             </a>
             <!-- Phone hidden until Joe provides a real number — restore with his real tel: link:
             <a class="channel" href="tel:+440000000000" data-channel="phone">
-              <span class="channel__icon">📞</span>
+              <span class="channel__icon" aria-hidden="true">📞</span>
               <span><span class="channel__label">Phone</span><span class="channel__val">Call or text</span></span>
             </a>
             -->
@@ -801,7 +802,7 @@
       </div>
 
       <nav class="footer__nav" aria-label="Footer">
-        <h4>Explore</h4>
+        <h3>Explore</h3>
         <a href="#coaching">Coaching</a>
         <a href="#about">About Joe</a>
         <a href="#plant-games">Plant Games</a>
@@ -810,7 +811,7 @@
       </nav>
 
       <nav class="footer__nav" aria-label="Connect">
-        <h4>Connect</h4>
+        <h3>Connect</h3>
         <a href="https://www.instagram.com/the_plant_pt/" target="_blank" rel="noopener">Instagram</a>
         <a href="https://theplantptshop.com" target="_blank" rel="noopener">The Plant PT Shop</a>
         <a href="https://goteamup.com/p/2381448-two-birds/c/schedule" target="_blank" rel="noopener">Class schedule</a>
@@ -835,7 +836,9 @@
           async src="//gc.zgo.at/count.js"></script>
   -->
 
-  <script src="js/vendor/lenis.min.js"></script>
+  <!-- Smooth scrolling is native CSS (scroll-behavior + scroll-padding in styles.css).
+       The vendored Lenis lib was removed: its scrollTo silently no-ops and it pinned the
+       page during anchor jumps, killing every in-page CTA when it loaded. -->
   <script src="js/main.js"></script>
 </body>
 </html>

@@ -40,28 +40,9 @@
   var yearEl = $("[data-year]");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* ---------- smooth scroll (Lenis) ---------- */
-  /* Progressive: only runs if the vendored lib loaded and the visitor hasn't
-     asked for reduced motion. The site scrolls perfectly fine without it. */
-  if (!prefersReduced && window.Lenis) {
-    var lenis = new window.Lenis({
-      duration: 1.1,
-      easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); }
-    });
-    (function raf(time) { lenis.raf(time); requestAnimationFrame(raf); })();
-
-    // Lenis now owns scrolling, so route in-page anchor links through it.
-    $$('a[href^="#"]').forEach(function (a) {
-      a.addEventListener("click", function (e) {
-        var hash = a.getAttribute("href");
-        if (hash.length < 2) return;               // ignore a bare "#"
-        var target = document.querySelector(hash);
-        if (!target) return;
-        e.preventDefault();
-        lenis.scrollTo(target, { offset: -68 });   // clear the sticky nav
-      });
-    });
-  }
+  /* Smooth scrolling is native: html { scroll-behavior: smooth; scroll-padding-top }
+     in styles.css (with a reduced-motion override). The Lenis library was removed —
+     its scrollTo silently no-oped and it fought native jumps, breaking in-page CTAs. */
 
   /* ---------- sticky nav + mobile sticky CTA ---------- */
   var nav = $("[data-nav]");
@@ -95,6 +76,12 @@
     document.body.classList.toggle("menu-open", open);
     toggle.setAttribute("aria-expanded", String(open));
     toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    // The open menu visually covers the page, so take the covered content out
+    // of the tab order / accessibility tree too — focus can't land under it.
+    $$("main, footer, .sticky-cta").forEach(function (el) {
+      if (open) el.setAttribute("inert", "");
+      else el.removeAttribute("inert");
+    });
   }
   if (toggle) {
     toggle.addEventListener("click", function () {
@@ -104,9 +91,38 @@
       a.addEventListener("click", function () { setMenu(false); });
     });
     document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") setMenu(false);
+      if (e.key === "Escape" && menu.classList.contains("is-open")) {
+        setMenu(false);
+        toggle.focus();                  // hand focus back to the control that opened it
+      }
     });
   }
+
+  /* ---------- in-page anchors: scroll, update URL, move focus ---------- */
+  /* The handler owns the whole jump: scrollIntoView (scroll-padding-top in
+     styles.css clears the fixed nav; reduced-motion gets an instant jump),
+     pushState keeps the URL shareable, and focus moves to the target so
+     keyboard/SR users aren't stranded on the clicked link.
+     [tabindex="-1"]:focus in styles.css keeps these non-interactive targets
+     ring-free. NB: attached after the mobile-menu close handler above, so a
+     tapped menu link lifts `inert` from <main> before we focus into it. */
+  $$('a[href^="#"]').forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      var hash = a.getAttribute("href");
+      if (hash.length < 2) return;               // ignore a bare "#"
+      var target = document.querySelector(hash);
+      if (!target) return;
+      e.preventDefault();
+      if (history.pushState) history.pushState(null, "", hash);
+      if (target.tabIndex < 0 && !target.hasAttribute("tabindex")) {
+        target.setAttribute("tabindex", "-1");   // sections aren't natively focusable
+      }
+      // Focus BEFORE starting the scroll — moving focus cancels an in-flight
+      // smooth scroll in Chrome, even with preventScroll: true.
+      target.focus({ preventScroll: true });
+      target.scrollIntoView({ behavior: prefersReduced ? "auto" : "smooth", block: "start" });
+    });
+  });
 
   /* ---------- scroll reveal ---------- */
   var revealEls = $$(".reveal");
@@ -196,6 +212,8 @@
         var ok = field.value && field.value.trim() !== "";
         if (field.type === "email") ok = ok && /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(field.value);
         field.classList.toggle("is-invalid", !ok);
+        if (ok) field.removeAttribute("aria-invalid");
+        else field.setAttribute("aria-invalid", "true"); // state isn't colour-only for AT
         if (!ok && valid) { field.focus(); valid = false; }
       });
       if (!valid) {
@@ -256,7 +274,7 @@
 
     // clear the invalid state as the user fixes a field
     $$("input, select, textarea", form).forEach(function (f) {
-      f.addEventListener("input", function () { f.classList.remove("is-invalid"); });
+      f.addEventListener("input", function () { f.classList.remove("is-invalid"); f.removeAttribute("aria-invalid"); });
     });
 
     function setNote(msg, type) {
@@ -323,9 +341,12 @@
       e.preventDefault();
       var ok = leadEmail && /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(leadEmail.value);
       if (!ok) { if (leadEmail) leadEmail.focus(); if (leadNote) { leadNote.textContent = "Please enter a valid email."; leadNote.classList.remove("is-success"); } return; }
-      // consent required for the marketing list (GDPR)
-      var leadConsent = leadForm.querySelector("[name=consent]");
+      // consent required for the marketing list (GDPR) — the checkbox sits
+      // outside the <form> tag (form="lead-form"), so go via .elements, which
+      // includes form-attribute-associated controls; querySelector wouldn't.
+      var leadConsent = leadForm.elements.consent;
       if (leadConsent && !leadConsent.checked) {
+        leadConsent.focus();
         if (leadNote) { leadNote.textContent = "Please tick the box to get the guide."; leadNote.classList.remove("is-success"); }
         return;
       }
