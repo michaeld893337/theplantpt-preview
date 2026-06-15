@@ -57,15 +57,13 @@
   /* Each photo is served AVIF → WebP → JPG via image-set(). After dropping a new
      file in /images, run `npm run optimize:images`, then point the 3 lines at it. */
   --img-hero: image-set(
-    url('../images/bootcamp-1200.avif') type('image/avif'),
-    url('../images/bootcamp-1200.webp') type('image/webp'),
-    url('../images/bootcamp.jpg') type('image/jpeg'));
-  /* Brand panel, not a photo — when Joe's portrait arrives, swap this back to an
-     image-set like the hero's and remove the inline .media__mark SVG in index.html. */
-  --img-about:
-    radial-gradient(120% 90% at 82% 8%, rgba(170,205,146,.5), transparent 55%),
-    radial-gradient(110% 85% at 12% 92%, rgba(201,90,48,.22), transparent 60%),
-    linear-gradient(160deg, #2c351f, #222a15);
+    url('../images/ring-hero-800.avif') type('image/avif'),
+    url('../images/ring-hero-800.webp') type('image/webp'),
+    url('../images/ring-hero.jpg') type('image/jpeg'));
+  --img-about: image-set(
+    url('../images/coach-portrait-1200.avif') type('image/avif'),
+    url('../images/coach-portrait-1200.webp') type('image/webp'),
+    url('../images/coach-portrait.jpg') type('image/jpeg'));
   --img-merch-1: image-set(
     url('../images/merch-polo-800.avif') type('image/avif'),
     url('../images/merch-polo-800.webp') type('image/webp'),
@@ -75,7 +73,6 @@
     url('../images/merch-socks-800.webp') type('image/webp'),
     url('../images/merch-socks.jpg') type('image/jpeg'));
   --img-merch-3: linear-gradient(150deg, #6f9e5b, #2c3719); /* (CTA tile, no photo) */
-  --img-vivo:    linear-gradient(150deg, #2c3719 0%, #5a7a33 100%); /* no Vivobarefoot photo yet */
   --img-spartan: image-set(
     url('../images/spartan-protein-800.avif') type('image/avif'),
     url('../images/spartan-protein-800.webp') type('image/webp'),
@@ -285,8 +282,8 @@ body.menu-open { overflow: hidden; }
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 .media__tag { position: absolute; left: 1rem; bottom: 1rem; z-index: 2; color: var(--paper); background: rgba(26,31,18,.5); backdrop-filter: blur(6px); padding: .4rem .8rem; border-radius: 100px; border: 1px solid rgba(243,239,229,.18); }
-.media--hero { background-image: url('../images/bootcamp.jpg'); background-image: var(--img-hero); background-position: 50% 35%; aspect-ratio: 4 / 5; }
-.media--about { background-color: #222a15; background-image: var(--img-about); aspect-ratio: 4 / 5; }
+.media--hero { background-image: url('../images/ring-hero.jpg'); background-image: var(--img-hero); background-position: 50% 35%; aspect-ratio: 4 / 5; }
+.media--about { background-color: #222a15; background-image: url('../images/coach-portrait.jpg'); background-image: var(--img-about); background-position: 50% 35%; aspect-ratio: 4 / 5; }
 .media__mark { position: absolute; inset: 0; margin: auto; width: 54%; aspect-ratio: 1; opacity: .92; }
 
 .hero__chip { position: absolute; z-index: 3; background: var(--cream); color: var(--ink); font-weight: 600; font-size: .9rem; padding: .6rem 1rem; border-radius: 100px; box-shadow: var(--shadow); border: 1px solid var(--line); }
@@ -397,10 +394,9 @@ body.menu-open { overflow: hidden; }
 .shop__foot { margin-top: 2.2rem; text-align: center; }
 
 /* ====================== 13 · GEAR / AFFILIATES ===================== */
-.gear__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.6rem; }
+.gear__grid { display: grid; grid-template-columns: 1fr; gap: 1.6rem; max-width: 780px; margin-inline: auto; }
 .affiliate { display: grid; grid-template-columns: .8fr 1.2fr; background: var(--cream); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
 .affiliate__media { position: relative; background-size: cover; min-height: 260px; display: flex; align-items: flex-end; padding: 1.2rem; }
-.affiliate__media--vivo { background-image: var(--img-vivo); }
 .affiliate__media--spartan { background-image: url('../images/spartan-protein.jpg'); background-image: var(--img-spartan); }
 .affiliate__type { color: var(--paper); background: rgba(26,31,18,.4); backdrop-filter: blur(6px); padding: .4rem .8rem; border-radius: 100px; }
 .affiliate__body { padding: 1.8rem; display: flex; flex-direction: column; }
@@ -423,12 +419,28 @@ body.menu-open { overflow: hidden; }
 .contact .section__title { color: var(--ink); }
 .contact__intro { margin-top: 1.1rem; color: var(--ink-soft); font-size: 1.1rem; max-width: 42ch; }
 
-.channels { display: grid; gap: .8rem; margin-top: 2.2rem; }
-.channel { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.2rem; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--cream); transition: background .25s, border-color .25s, transform .3s var(--ease); }
-.channel:hover { background: #fff; border-color: var(--moss); transform: translateX(4px); }
-.channel__icon { font-size: 1.4rem; }
+.channels { display: grid; gap: .7rem; margin-top: 2.2rem; }
+.channel { display: flex; align-items: center; gap: .9rem; padding: .8rem .95rem; border: 1px solid var(--line); border-radius: 14px; background: var(--cream); text-decoration: none; color: inherit; transition: background .25s var(--ease), border-color .25s var(--ease), box-shadow .3s var(--ease), transform .3s var(--ease); }
+.channel:hover { background: #fff; border-color: rgba(76,106,56,.45); box-shadow: var(--shadow-sm); transform: translateY(-2px); }
+.channel:focus-visible { outline: 2px solid var(--moss); outline-offset: 2px; }
+
+/* brand-coloured icon tile */
+.channel__icon { flex: 0 0 auto; width: 46px; height: 46px; display: grid; place-items: center; border-radius: 12px; color: #fff; box-shadow: inset 0 1px 0 rgba(255,255,255,.28), 0 5px 12px -5px rgba(26,31,18,.55); transition: transform .3s var(--ease); }
+.channel__icon svg { width: 23px; height: 23px; display: block; }
+.channel:hover .channel__icon { transform: scale(1.05); }
+.channel[data-channel="whatsapp"]  .channel__icon { background: linear-gradient(145deg, #25d366, #128c5e); }
+.channel[data-channel="instagram"] .channel__icon { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%); }
+.channel[data-channel="email"]     .channel__icon { background: linear-gradient(145deg, var(--clay), var(--clay-press)); }
+.channel[data-channel="phone"]     .channel__icon { background: linear-gradient(145deg, var(--moss), #36512a); }
+
+.channel__body { display: grid; gap: .08rem; min-width: 0; }
 .channel__label { display: block; color: var(--moss); }
-.channel__val { display: block; font-weight: 600; }
+.channel__val { display: block; font-weight: 600; color: var(--ink); overflow-wrap: anywhere; }
+
+/* arrow slides in on hover (matches the site's CTA arrow motif) */
+.channel__go { flex: 0 0 auto; margin-left: auto; color: var(--moss); opacity: 0; transform: translateX(-5px); transition: opacity .25s var(--ease), transform .25s var(--ease); }
+.channel:hover .channel__go, .channel:focus-visible .channel__go { opacity: 1; transform: translateX(0); }
+@media (prefers-reduced-motion: reduce) { .channel, .channel__icon, .channel__go { transition: none; } .channel__go { opacity: 1; transform: none; } }
 
 /* form */
 .contact__form-wrap, .mealprep__form-wrap { background: var(--cream); color: var(--ink); border-radius: var(--radius-lg); padding: clamp(1.6rem, 3vw, 2.4rem); box-shadow: var(--shadow-lg); }
