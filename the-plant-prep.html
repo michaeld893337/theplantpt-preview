@@ -67,7 +67,16 @@
     .prep-foot { border-top: 1px solid var(--line); margin-top: 3.5rem; padding: 2rem 0 3rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: center; color: var(--ink-soft); font-size: .85rem; }
     .prep-foot a { color: var(--moss); font-weight: 600; }
 
-    @media (max-width: 640px) { .menu-grid { grid-template-columns: 1fr; } }
+    /* "make it yourself at home" → free 7-day meal plans */
+    .prep-plans { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; margin: 3.4rem 0 0; padding: clamp(1.6rem, 3vw, 2.3rem) clamp(1.6rem, 3vw, 2.4rem); background: var(--olive); border-radius: var(--radius-lg); text-decoration: none; box-shadow: var(--shadow); transition: transform .3s var(--ease), box-shadow .3s var(--ease); }
+    .prep-plans:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+    .prep-plans__eyebrow { display: block; font-family: var(--font-mono); font-size: .74rem; text-transform: uppercase; letter-spacing: .12em; color: var(--leaf-bright); }
+    .prep-plans__title { display: block; font-family: var(--font-display); font-weight: 600; font-size: clamp(1.5rem, 3.5vw, 2.1rem); margin-top: .35rem; color: #fff; line-height: 1.05; }
+    .prep-plans__sub { display: block; color: rgba(255,255,255,.82); margin-top: .55rem; max-width: 48ch; font-size: .98rem; line-height: 1.5; }
+    .prep-plans__btn { flex: none; display: inline-flex; align-items: center; gap: .5rem; background: var(--clay); color: #fff; font-weight: 600; padding: .85rem 1.6rem; border-radius: 100px; transition: background .25s; }
+    .prep-plans:hover .prep-plans__btn { background: var(--clay-press); }
+
+    @media (max-width: 640px) { .menu-grid { grid-template-columns: 1fr; } .prep-plans { flex-direction: column; align-items: flex-start; } }
   </style>
 </head>
 
@@ -216,6 +225,18 @@
 
         </div>
       </div>
+    </section>
+
+    <!-- ===================== MAKE IT YOURSELF → FREE MEAL PLANS ===================== -->
+    <section class="shell" aria-label="Free 7-day meal plans">
+      <a class="prep-plans" href="meal-plans/index.html">
+        <span class="prep-plans__text">
+          <span class="prep-plans__eyebrow">Want to try making it yourself at home?</span>
+          <span class="prep-plans__title">Free 7-day meal plans</span>
+          <span class="prep-plans__sub">Ten goal-based, plant-powered plans — fat loss, muscle, budget, gluten-free and more. Pick a goal, prep once, eat all week.</span>
+        </span>
+        <span class="prep-plans__btn">Browse the plans <span aria-hidden="true">&rarr;</span></span>
+      </a>
     </section>
 
     <!-- ===================== JOIN THE LIST (email capture) ===================== -->
