@@ -469,6 +469,10 @@ body.menu-open { overflow: hidden; }
 .mealprep__points { margin-top: 1.4rem; display: grid; gap: .6rem; list-style: none; padding: 0; }
 .mealprep__points li { position: relative; padding-left: 1.6rem; color: var(--ink-soft); }
 .mealprep__points li::before { content: "✓"; position: absolute; left: 0; color: var(--moss); font-weight: 700; }
+.mealprep__copy .btn { margin-top: 2rem; }
+.mealprep__diy { margin-top: .9rem; font-size: .92rem; color: var(--ink-soft); }
+.mealprep__diy a { color: var(--moss); font-weight: 600; text-decoration: underline; text-decoration-color: rgba(76,106,56,.35); text-underline-offset: 3px; transition: text-decoration-color .2s; }
+.mealprep__diy a:hover { text-decoration-color: var(--moss); }
 .mealprep__signup-eyebrow { font-family: var(--font-mono); font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; color: var(--clay-ink); font-weight: 600; }
 .mealprep__signup-title { font-family: var(--font-display); font-size: 1.55rem; font-weight: 600; color: var(--ink); margin-top: .3rem; }
 .mealprep__signup-sub { color: var(--ink-soft); margin-top: .5rem; }
