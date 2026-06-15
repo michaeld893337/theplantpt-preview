@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1f2a16" />
+
+  <title>The Plant Prep — Macro-tracked meal prep | The Plant PT, Glasgow</title>
+  <meta name="description" content="The Plant Prep menu from Joe Wilson, The Plant PT — macro-tracked breakfast and dinner meal prep in Glasgow. Meat, veggie and vegan options. Join the list for the weekly menu." />
+  <link rel="canonical" href="https://plantpt.co.uk/the-plant-prep.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="The Plant Prep — macro-tracked meal prep, Glasgow" />
+  <meta property="og:description" content="Chef-prepped breakfast & dinner with the macros done for you. Meat, veggie & vegan. Join the list for the weekly menu." />
+  <meta property="og:url" content="https://plantpt.co.uk/the-plant-prep.html" />
+  <meta property="og:site_name" content="The Plant PT" />
+
+  <link rel="stylesheet" href="css/fonts.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/brand/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/brand/favicon-16.png" />
+  <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png" />
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <style>
+    /* Page-local styles for the menu — keeps the main stylesheet lean (same
+       pattern as privacy.html). Design tokens come from styles.css. */
+    .prep-nav { position: sticky; top: 0; z-index: 50; background: rgba(243,239,229,.92); backdrop-filter: saturate(140%) blur(8px); border-bottom: 1px solid var(--line); }
+    .prep-nav__inner { display: flex; align-items: center; justify-content: space-between; padding: .9rem 0; }
+    .prep-nav__back { font-weight: 600; color: var(--moss); }
+    .prep-nav__back:hover { color: var(--clay-ink); }
+
+    .prep-hero { padding: 3.5rem 0 .5rem; }
+    .prep-hero .eyebrow { color: var(--moss); }
+    .prep-hero .eyebrow__no { color: var(--clay-ink); }
+    .prep-hero h1 { font-family: var(--font-display); font-weight: 600; font-size: clamp(2.4rem, 6vw, 4rem); line-height: 1.02; margin-top: .6rem; }
+    .prep-hero h1 em { font-style: italic; color: var(--clay-ink); }
+    .prep-hero__sub { color: var(--ink-soft); font-size: 1.15rem; margin-top: 1.1rem; max-width: 54ch; }
+    .prep-legend { font-family: var(--font-mono); font-size: .76rem; color: var(--moss); margin-top: 1.3rem; letter-spacing: .03em; }
+    .prep-legend b { color: var(--ink); }
+
+    .menu-cat { padding: 2.6rem 0 0; }
+    .menu-cat__title { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.6rem, 4vw, 2.4rem); display: flex; align-items: baseline; gap: .9rem; flex-wrap: wrap; }
+    .menu-cat__title span { font-family: var(--font-mono); font-size: .76rem; color: var(--moss); text-transform: uppercase; letter-spacing: .14em; }
+
+    .menu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; margin-top: 1.6rem; }
+    .dish { background: var(--cream); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.4rem 1.5rem; box-shadow: var(--shadow); display: flex; flex-direction: column; }
+    .dish__head { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+    .dish__name { font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; color: var(--ink); line-height: 1.15; }
+    .dish__tag { flex: none; font-family: var(--font-mono); font-size: .6rem; text-transform: uppercase; letter-spacing: .08em; font-weight: 600; padding: .3rem .6rem; border-radius: 100px; white-space: nowrap; }
+    .dish__tag--vg { background: #cfe6b4; color: #3a5222; }
+    .dish__tag--v { background: #e8efd5; color: #5e6c2c; }
+    .dish__tag--meat { background: #f1ddd1; color: #8f3e20; }
+    .dish__macros { font-family: var(--font-mono); font-size: .76rem; color: var(--moss); margin-top: .6rem; letter-spacing: .02em; }
+    .dish__macros strong { color: var(--clay-ink); font-size: .92rem; }
+    .dish__desc { color: var(--ink-soft); margin-top: .7rem; font-size: .95rem; line-height: 1.55; flex: 1; }
+    .dish__price { margin-top: .95rem; font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; color: var(--ink); }
+    .dish__price--tbc { font-family: var(--font-mono); font-size: .72rem; font-weight: 500; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-soft); }
+
+    .prep-cta { margin: 3.6rem 0 1rem; background: #d3e0c4; border-radius: var(--radius-lg); padding: clamp(1.9rem, 4vw, 3.2rem); text-align: center; }
+    .prep-cta .eyebrow__no { color: #954022; }
+    .prep-cta h2 { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.7rem, 4vw, 2.5rem); margin-top: .4rem; }
+    .prep-cta p { color: var(--ink-soft); margin: .8rem auto 0; max-width: 48ch; }
+    .prep-cta .lead-form { justify-content: center; max-width: 460px; margin: 1.6rem auto 0; }
+    .prep-cta .consent { justify-content: center; max-width: 460px; margin-inline: auto; }
+    .prep-cta .lead-form__note, .prep-cta .form__legal { text-align: center; }
+
+    .prep-foot { border-top: 1px solid var(--line); margin-top: 3.5rem; padding: 2rem 0 3rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: center; color: var(--ink-soft); font-size: .85rem; }
+    .prep-foot a { color: var(--moss); font-weight: 600; }
+
+    @media (max-width: 640px) { .menu-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="prep-nav">
+    <div class="shell prep-nav__inner">
+      <a class="brand" href="index.html" aria-label="The Plant PT home">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <span class="brand__text">The Plant&nbsp;PT</span>
+      </a>
+      <a class="prep-nav__back" href="index.html#meal-prep">&larr; Back to the site</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="prep-hero">
+      <div class="shell">
+        <p class="eyebrow"><span class="eyebrow__no">&#10022;</span> The Plant Prep</p>
+        <h1>Macros done for you.<br /><em>Every diet covered.</em></h1>
+        <p class="prep-hero__sub">
+          Chef-prepped meals from The Plant PT, portioned for your week with the macros already worked
+          out — from high-protein meat dishes to fully vegan. Here's what's on the menu.
+        </p>
+        <p class="prep-legend"><b>VG</b> vegan &nbsp;·&nbsp; <b>V</b> vegetarian &nbsp;·&nbsp; everything macro-tracked (kcal + protein / carbs / fat)</p>
+      </div>
+    </section>
+
+    <!-- ===================== BREAKFAST ===================== -->
+    <section class="menu-cat" aria-labelledby="cat-breakfast">
+      <div class="shell">
+        <h2 class="menu-cat__title" id="cat-breakfast">Breakfast <span>5 dishes</span></h2>
+        <div class="menu-grid">
+
+          <article class="dish">
+            <div class="dish__head">
+              <h3 class="dish__name">Dark Chocolate Overnight Oats</h3>
+              <span class="dish__tag dish__tag--vg">Vegan</span>
+            </div>
+            <p class="dish__macros"><strong>457</strong> kcal &middot; P 23g &middot; C 55g &middot; F 24g</p>
+            <p class="dish__desc">Oats, protein powder, soy milk and dark chocolate drops.</p>
+            <p class="dish__price">£3.95</p>
+          </article>
+
+          <article class="dish">
+            <div class="dish__head">
+              <h3 class="dish__name">Banana &amp; Peanut Butter Overnight Oats</h3>
+              <span class="dish__tag dish__tag--vg">Vegan</span>
+            </div>
+            <p class="dish__macros"><strong>492</strong> kcal &middot; P 27g &middot; C 61g &middot; F 27g</p>
+            <p class="dish__desc">Oats, protein powder, soy milk, peanut butter and banana.</p>
+            <p class="dish__price">£3.95</p>
+          </article>
+
+          <article class="dish">
+            <div class="dish__head">
+              <h3 class="dish__name">The Breakfast</h3>
+              <span class="dish__tag dish__tag--meat">Chicken</span>
+            </div>
+            <p class="dish__macros"><strong>510</strong> kcal &middot; P 25g &middot; C 59g &middot; F 28g</p>
+            <p class="dish__desc">Chicken sausages, scrambled egg, tomatoes, smokey baked beans and mini seasoned potatoes.</p>
+            <p class="dish__price">£6.50</p>
+          </article>
+
+          <article class="dish">
+            <div class="dish__head">
+              <h3 class="dish__name">Plant Breakfast</h3>
+              <span class="dish__tag dish__tag--vg">Vegan</span>
+            </div>
+            <p class="dish__macros"><strong>419</strong> kcal &middot; P 21g &middot; C 62g &middot; F 22g</p>
+            <p class="dish__desc">Vegan Quorn sausage, tofu, tomatoes, smokey baked beans and mini seasoned potatoes.</p>
+            <p class="dish__price">£6.50</p>
+          </article>
+
+          <article class="dish">
+            <div class="dish__head">
+              <h3 class="dish__name">Veggie Omelette</h3>
+              <span class="dish__tag dish__tag--v">Veggie</span>
+            </div>
+            <p class="dish__macros"><strong>457</strong> kcal &middot; P 23g &middot; C 44g &middot; F 20g</p>
+            <p class="dish__desc">Golden potatoes, sweetcorn, peppers, cheddar and a hint of sriracha.</p>
+            <p class="dish__price dish__price--tbc">Price TBC</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== DINNER ===================== -->
+    <section class="menu-cat" aria-labelledby="cat-dinner">
+      <div class="shell">
+        <h2 class="menu-cat__title" id="cat-dinner">Dinner <span>5 dishes</span></h2>
+        <div class="menu-grid">
+
+          <article class="dish">
+            <div class="dish__head">
+              <h3 class="dish__name">Turkey Patties</h3>
+              <span class="dish__tag dish__tag--meat">Turkey</span>
+            </div>
+            <p class="dish__macros"><strong>365</strong> kcal &middot; P 29g &middot; C 38g &middot; F 19g</p>
+            <p class="dish__desc">Turkey patties with roasted sweet potato wedges, tender broccoli and a hot chopped tomato salsa with garlic, onion &amp; chilli.</p>
+            <p class="dish__price dish__price--tbc">Price TBC</p>
+          </article>
+
+          <article class="dish">
+            <div class="dish__head">
+              <h3 class="dish__name">Sweet Potato &amp; Chickpea Curry</h3>
+              <span class="dish__tag dish__tag--vg">Vegan</span>
+            </div>
+            <p class="dish__macros"><strong>602</strong> kcal &middot; P 18g &middot; C 83g &middot; F 25g</p>
+            <p class="dish__desc">Sweet potato and protein-rich chickpeas in a creamy coconut &amp; tomato sauce with garlic, ginger and warming spices. Served with fluffy basmati rice and fresh spinach.</p>
+            <p class="dish__price dish__price--tbc">Price TBC</p>
+          </article>
+
+          <article class="dish">
+            <div class="dish__head">
+              <h3 class="dish__name">Chicken Mince Curry</h3>
+              <span class="dish__tag dish__tag--meat">Chicken</span>
+            </div>
+            <p class="dish__macros"><strong>420</strong> kcal &middot; P 28g &middot; C 32g &middot; F 23g</p>
+            <p class="dish__desc">Chicken mince curry cooked in authentic Indian spices with a proper spice kick, served with brown rice.</p>
+            <p class="dish__price dish__price--tbc">Price TBC</p>
+          </article>
+
+          <article class="dish">
+            <div class="dish__head">
+              <h3 class="dish__name">Italian-Style Meatballs</h3>
+              <span class="dish__tag dish__tag--meat">Pork &amp; beef</span>
+            </div>
+            <p class="dish__macros"><strong>365</strong> kcal &middot; P 29g &middot; C 38g &middot; F 19g</p>
+            <p class="dish__desc">Seasoned pork and beef meatballs with pasta in a herby tomato-based sauce.</p>
+            <p class="dish__price dish__price--tbc">Price TBC</p>
+          </article>
+
+          <article class="dish">
+            <div class="dish__head">
+              <h3 class="dish__name">Stuffed Peppers</h3>
+              <span class="dish__tag dish__tag--v">Veggie</span>
+            </div>
+            <p class="dish__macros"><strong>384</strong> kcal &middot; P 17g &middot; C 55g &middot; F 9g</p>
+            <p class="dish__desc">Sweet red peppers filled with basmati rice, black beans, sweetcorn and yellow pepper, seasoned with smoked paprika. Topped with cheddar, mozzarella and spring onion.</p>
+            <p class="dish__price dish__price--tbc">Price TBC</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== JOIN THE LIST (email capture) ===================== -->
+    <section class="prep-cta" id="join">
+      <div class="shell">
+        <p class="eyebrow"><span class="eyebrow__no">&#10022;</span> Be first to order</p>
+        <h2>Get the weekly menu</h2>
+        <p>Join the Plant Prep list for the weekly menu, new dishes and early access — straight to your inbox.</p>
+        <form class="lead-form" id="prep-menu-form" data-capture-form data-source="meal-prep" data-success="You're on the Plant Prep list — Joe will send the weekly menu. 🌱" novalidate>
+          <input type="email" name="email" placeholder="you@email.com" aria-label="Your email address" required />
+          <button type="submit" class="btn btn--accent">Join the list</button>
+          <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        </form>
+        <label class="consent">
+          <input type="checkbox" name="consent" form="prep-menu-form" required />
+          <span>Email me the Plant Prep menu &amp; updates — unsubscribe anytime.</span>
+        </label>
+        <p class="lead-form__note" data-capture-note role="status" aria-live="polite">Free to join · No spam, ever.</p>
+        <p class="form__legal"><a href="privacy.html">How your details are handled</a></p>
+      </div>
+    </section>
+
+    <div class="shell">
+      <div class="prep-foot">
+        <span>&copy; <span data-year>2026</span> The Plant PT · Joe Wilson · Glasgow</span>
+        <span><a href="index.html">The Plant PT</a> &nbsp;·&nbsp; <a href="index.html#contact">Contact</a> &nbsp;·&nbsp; <a href="privacy.html">Privacy</a></span>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -7,14 +7,14 @@
 
   <!-- ===================== SEO / SOCIAL ===================== -->
   <title>The Plant PT — Joe Wilson | Personal Trainer & Boxing Coach, Glasgow</title>
-  <meta name="description" content="Plant-powered personal training & boxing coaching in Glasgow with Joe Wilson, The Plant PT. 1:1 and online coaching, flexible nutrition for any diet, group classes and the Plant Games. Get fitter, leaner and more confident." />
+  <meta name="description" content="Plant-fuelled, performance-driven personal training & boxing coaching in Glasgow with Joe Wilson, The Plant PT. Group classes, online programming and 1:1 coaching, flexible nutrition for any diet. Get fitter, stronger and more confident." />
   <meta name="keywords" content="personal trainer Glasgow, plant based personal trainer, boxing coach Glasgow, online fitness coaching, vegan personal trainer, The Plant PT, Joe Wilson" />
   <link rel="canonical" href="https://plantpt.co.uk/" />
 
   <!-- Open Graph (controls how the link looks in ads, WhatsApp, Instagram, Facebook) -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="The Plant PT — Joe Wilson | Personal Trainer & Boxing Coach" />
-  <meta property="og:description" content="Plant-powered strength, built with Glasgow grit. 1:1 & online coaching for any diet. Start your transformation today." />
+  <meta property="og:description" content="Plant-fuelled, performance-driven coaching for any diet. Group classes, online programming &amp; 1:1 training in Glasgow — your first class is free." />
   <meta property="og:image" content="https://plantpt.co.uk/images/bootcamp.jpg" />
   <meta property="og:url" content="https://plantpt.co.uk/" />
   <meta property="og:site_name" content="The Plant PT" />
@@ -24,8 +24,9 @@
   <link rel="stylesheet" href="css/fonts.css" />
 
   <!-- ===================== STYLES / FAVICON ===================== -->
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
-  <link rel="apple-touch-icon" href="assets/logo.jpg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/brand/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/brand/favicon-16.png" />
+  <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png" />
   <link rel="stylesheet" href="css/styles.css" />
 
   <!-- Structured data: helps Google show Joe as a local business -->
@@ -34,7 +35,7 @@
     "@context": "https://schema.org",
     "@type": "HealthClub",
     "name": "The Plant PT — Joe Wilson",
-    "description": "Plant-powered personal training and boxing coaching in Glasgow.",
+    "description": "Plant-fuelled, performance-driven personal training and boxing coaching in Glasgow.",
     "url": "https://plantpt.co.uk",
     "image": "https://plantpt.co.uk/images/bootcamp.jpg",
     "areaServed": "Glasgow",
@@ -69,12 +70,12 @@
       {
         "@type": "Question",
         "name": "How much does it cost?",
-        "acceptedAnswer": { "@type": "Answer", "text": "It depends what we build together — 1:1 sessions, online coaching or a 12-week block. Book the free 15-minute consult and you'll get exact rates with no pressure, no lock-ins and no hidden fees." }
+        "acceptedAnswer": { "@type": "Answer", "text": "It's all on the page — group classes are £12 with your first one free, online programming starts at £55 a month, and 1:1 training is £40 a session (£160 for a block of four). No lock-ins, no hidden fees, and a free chat before you commit to anything." }
       },
       {
         "@type": "Question",
         "name": "What happens after I send an enquiry?",
-        "acceptedAnswer": { "@type": "Answer", "text": "It comes straight to me — I personally reply to every enquiry, usually within a day or two. We'll set up a free, no-obligation chat about your goals. No spam, no hard sell." }
+        "acceptedAnswer": { "@type": "Answer", "text": "It comes straight to me — I personally reply to every enquiry, usually within 24–48 hours. We'll set up a free, no-obligation chat about your goals. No spam, no hard sell." }
       }
     ]
   }
@@ -103,6 +104,9 @@
         <a href="#pricing">Pricing</a>
         <a href="#about">About</a>
         <a href="#shop">Shop</a>
+        <a href="#meal-prep">Meal&nbsp;prep</a>
+        <!-- Returning clients → the app (Expo web build on the app. subdomain). -->
+        <a href="https://app.plantpt.co.uk" class="nav__login">Client&nbsp;login</a>
         <a href="#contact" class="nav__cta">Start today</a>
       </nav>
 
@@ -119,6 +123,8 @@
       <a href="#pricing">Pricing</a>
       <a href="#about">About</a>
       <a href="#shop">Shop</a>
+      <a href="#meal-prep">Meal prep</a>
+      <a href="https://app.plantpt.co.uk" class="mobile-menu__login">Client login</a>
       <a href="#contact" class="mobile-menu__cta">Start today</a>
     </nav>
     <div class="mobile-menu__foot">
@@ -138,33 +144,33 @@
       <div class="shell hero__inner">
         <div class="hero__copy">
           <p class="kicker reveal">
-            <span class="kicker__dot"></span>Glasgow · Plant-Powered Performance Coach
+            <span class="kicker__dot"></span><span data-key="hero.kicker">Glasgow · Plant-Fuelled, Performance-Driven</span>
           </p>
-          <h1 class="hero__title reveal" data-reveal-delay="1">
-            Plant-powered strength,<br />
-            <em>built with Glasgow grit.</em>
+          <h1 class="hero__title reveal" data-reveal-delay="1" data-key="hero.title">
+            Plant-fuelled strength.<br />
+            <em>Performance-driven coaching.</em>
           </h1>
-          <p class="hero__lead reveal" data-reveal-delay="2">
-            I'm <strong>Joe</strong> — a Glasgow boxing &amp; fitness coach. I help you get fitter,
-            stronger and more confident in <em>body and mind</em>, with training and nutrition built
-            around your life — plant-based or not.
+          <p class="hero__lead reveal" data-reveal-delay="2" data-key="hero.lead">
+            I'm <strong>Joe</strong> — a Glasgow boxing &amp; strength coach. Group classes, online
+            programming and 1:1 training, built around <em>your</em> life and your diet. Not a
+            copy-paste plan off the shelf — programming I train myself, day in, day out.
           </p>
           <div class="hero__actions reveal" data-reveal-delay="3">
             <a href="#contact" class="btn btn--accent">
-              Start your transformation
+              Start training
               <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
             <a href="#coaching" class="btn btn--ghost">See how I coach</a>
           </div>
           <ul class="hero__stats reveal" data-reveal-delay="4">
             <li><span class="num" data-count="16">16</span><small>Boxing since age</small></li>
-            <li><span class="num">L2/3</span><small>Qualified coach</small></li>
+            <li><span class="num">L3</span><small>PT &amp; Nutrition</small></li>
             <li><span class="num">All</span><small>Diets welcome</small></li>
           </ul>
         </div>
 
         <div class="hero__media reveal" data-reveal-delay="2">
-          <div class="media media--hero" role="img" aria-label="Joe coaching an outdoor group session in Glasgow">
+          <div class="media media--hero" role="img" aria-label="Joe coaching an outdoor group session in Glasgow" data-key="img.hero">
             <span class="media__tag">Joe's outdoor sessions · Glasgow</span>
           </div>
           <div class="hero__chip hero__chip--1">🥊 Boxing &amp; padwork</div>
@@ -203,12 +209,12 @@
     ============================================================ -->
     <section class="statement">
       <div class="shell">
-        <p class="statement__kicker reveal">The philosophy</p>
-        <h2 class="statement__big reveal" data-reveal-delay="1">
+        <p class="statement__kicker reveal" data-key="statement.kicker">The philosophy</p>
+        <h2 class="statement__big reveal" data-reveal-delay="1" data-key="statement.title">
           You don't have to go vegan to train with me.
           You just have to <span class="hl">want to change.</span>
         </h2>
-        <p class="statement__sub reveal" data-reveal-delay="2">
+        <p class="statement__sub reveal" data-reveal-delay="2" data-key="statement.sub">
           I trained competitively for years before going fully plant-based — and it took my health to
           another level. But this isn't about preaching a diet. It's about building a stronger,
           healthier you, whatever your lifestyle.
@@ -223,8 +229,8 @@
       <div class="shell">
         <header class="section__head reveal">
           <p class="eyebrow"><span class="eyebrow__no">01</span> Ways to train</p>
-          <h2 class="section__title">Pick the path that fits your life.</h2>
-          <p class="section__intro">
+          <h2 class="section__title" data-key="coaching.title">Pick the path that fits your life.</h2>
+          <p class="section__intro" data-key="coaching.intro">
             Every option below is built around your goals, your schedule and your diet —
             whether that's fat loss, building muscle, learning to box, or simply feeling good again.
           </p>
@@ -233,43 +239,43 @@
         <div class="cards">
           <article class="card reveal">
             <div class="card__no">01</div>
-            <h3 class="card__title">1:1 Personal Training</h3>
-            <p>In-person sessions in Glasgow, tailored entirely to you. Real coaching, real accountability, real results.</p>
-            <a href="#contact" class="card__link">Train with Joe <span aria-hidden="true">→</span></a>
+            <h3 class="card__title" data-key="coaching.card1.title">Online Programming</h3>
+            <p data-key="coaching.card1.body">Train anywhere, from £55/month. A custom plan, app-based workouts, nutrition guidance and check-ins — programming I actually train myself.</p>
+            <a href="#contact" class="card__link">Start online <span aria-hidden="true">→</span></a>
           </article>
 
           <article class="card reveal" data-reveal-delay="1">
             <div class="card__no">02</div>
-            <h3 class="card__title">Online Coaching</h3>
-            <p>Train anywhere. A custom plan, app-based workouts, nutrition guidance and weekly check-ins to keep you on track.</p>
-            <a href="#contact" class="card__link">Coach me online <span aria-hidden="true">→</span></a>
+            <h3 class="card__title" data-key="coaching.card2.title">Group Classes</h3>
+            <p data-key="coaching.card2.body">Train with a community — boxing, conditioning and good craic. £12 a class, and your <strong>first one's free</strong>.</p>
+            <a href="https://goteamup.com/p/2381448-two-birds/c/schedule" target="_blank" rel="noopener" class="card__link">View the schedule <span aria-hidden="true">→</span></a>
           </article>
 
           <article class="card reveal" data-reveal-delay="2">
             <div class="card__no">03</div>
-            <h3 class="card__title">Boxing &amp; Padwork</h3>
-            <p>Learn proper technique, sharpen your fitness and build serious confidence — no experience needed.</p>
-            <a href="#contact" class="card__link">Put the gloves on <span aria-hidden="true">→</span></a>
+            <h3 class="card__title" data-key="coaching.card3.title">1:1 Personal Training</h3>
+            <p data-key="coaching.card3.body">In-person sessions in Glasgow, tailored entirely to you. Real coaching, real accountability, real results — £40 an hour.</p>
+            <a href="#contact" class="card__link">Train with Joe <span aria-hidden="true">→</span></a>
           </article>
 
           <article class="card reveal">
             <div class="card__no">04</div>
-            <h3 class="card__title">Plant-Based &amp; Flexible Nutrition</h3>
-            <p>Nutrition that works for any diet. Plant-based, omnivore or somewhere in between — I'll build it around you.</p>
-            <a href="#contact" class="card__link">Sort my nutrition <span aria-hidden="true">→</span></a>
+            <h3 class="card__title" data-key="coaching.card4.title">Boxing &amp; Padwork</h3>
+            <p data-key="coaching.card4.body">Learn proper technique, sharpen your fitness and build serious confidence — no experience needed.</p>
+            <a href="#contact" class="card__link">Put the gloves on <span aria-hidden="true">→</span></a>
           </article>
 
           <article class="card reveal" data-reveal-delay="1">
             <div class="card__no">05</div>
-            <h3 class="card__title">Group Classes</h3>
-            <p>Train with a community. Book sessions and memberships through the live class schedule.</p>
-            <a href="https://goteamup.com/p/2381448-two-birds/c/schedule" target="_blank" rel="noopener" class="card__link">View the schedule <span aria-hidden="true">→</span></a>
+            <h3 class="card__title" data-key="coaching.card5.title">Plant-Based &amp; Flexible Nutrition</h3>
+            <p data-key="coaching.card5.body">Nutrition that works for any diet. Plant-based, omnivore or somewhere in between — I'll build it around you.</p>
+            <a href="#contact" class="card__link">Sort my nutrition <span aria-hidden="true">→</span></a>
           </article>
 
           <article class="card card--feature reveal" data-reveal-delay="2">
             <div class="card__no">06</div>
-            <h3 class="card__title">The Plant Games</h3>
-            <p>Glasgow's plant-powered fitness event. Compete, connect and push yourself with the community.</p>
+            <h3 class="card__title" data-key="coaching.card6.title">The Plant Games</h3>
+            <p data-key="coaching.card6.body">Glasgow's plant-fuelled fitness event. Compete, connect and push yourself with the community.</p>
             <a href="#plant-games" class="card__link">Learn more <span aria-hidden="true">→</span></a>
           </article>
         </div>
@@ -283,46 +289,44 @@
       <div class="shell">
         <header class="section__head section__head--center reveal">
           <p class="eyebrow"><span class="eyebrow__no">02</span> Pricing</p>
-          <h2 class="section__title">Simple, honest pricing.</h2>
-          <p class="section__intro">No lock-ins, no hidden fees — and a free consult before you commit to anything.</p>
+          <h2 class="section__title" data-key="pricing.title">Real prices, up front.</h2>
+          <p class="section__intro" data-key="pricing.intro">No lock-ins, no hidden fees — and your first class is free. What you see is what you pay.</p>
         </header>
-        <!-- Value-led cards: when Joe confirms his rates, swap each .price-card__price
-             back to e.g.  £45<span> / session</span>  and drop the --term modifier. -->
         <div class="pricing__grid">
           <article class="price-card reveal">
-            <p class="price-card__name">Pay-as-you-go</p>
-            <p class="price-card__price price-card__price--term">Per session<span> · no commitment</span></p>
+            <p class="price-card__name" data-key="price.group.name">Group Classes</p>
+            <p class="price-card__price"><span data-key="price.group.amount">£12</span><span> / class</span></p>
             <ul class="price-card__list">
-              <li>1:1 in-person training in Glasgow</li>
-              <li>Fully tailored to your goals</li>
-              <li>Book session by session, as it suits</li>
+              <li data-key="price.group.feat1"><strong>Your first class is free</strong> — just turn up</li>
+              <li data-key="price.group.feat2">Boxing, conditioning &amp; community</li>
+              <li data-key="price.group.feat3">All levels · book around your week</li>
             </ul>
-            <a href="#booking" class="btn btn--dark">Book in</a>
+            <a href="https://goteamup.com/p/2381448-two-birds/c/schedule" target="_blank" rel="noopener" class="btn btn--dark">See the schedule</a>
           </article>
           <article class="price-card price-card--featured reveal" data-reveal-delay="1">
             <span class="price-badge">Most popular</span>
-            <p class="price-card__name">12-Week Transformation</p>
-            <p class="price-card__price price-card__price--term">12 weeks<span> · full programme</span></p>
+            <p class="price-card__name" data-key="price.online.name">Online Programming</p>
+            <p class="price-card__price"><span data-key="price.online.amount">£55</span><span> / month</span></p>
             <ul class="price-card__list">
-              <li>Personalised training &amp; nutrition plan</li>
-              <li>Weekly check-ins &amp; accountability</li>
-              <li>App workouts &amp; progress tracking</li>
-              <li>Free consult to map it all out</li>
+              <li data-key="price.online.feat1"><strong>£55</strong> — your custom plan &amp; app workouts</li>
+              <li data-key="price.online.feat2"><strong>£80</strong> — plus weekly check-ins &amp; accountability</li>
+              <li data-key="price.online.feat3"><strong>£110</strong> — plus 1:1 coaching &amp; full support</li>
+              <li data-key="price.online.feat4">Train anywhere · cancel anytime</li>
             </ul>
-            <a href="#booking" class="btn btn--accent">Start now</a>
+            <a href="#contact" class="btn btn--accent">Start online</a>
           </article>
           <article class="price-card reveal" data-reveal-delay="2">
-            <p class="price-card__name">Online Coaching</p>
-            <p class="price-card__price price-card__price--term">Monthly<span> · cancel anytime</span></p>
+            <p class="price-card__name" data-key="price.pt.name">1:1 Personal Training</p>
+            <p class="price-card__price"><span data-key="price.pt.amount">£160</span><span> / 4 sessions</span></p>
             <ul class="price-card__list">
-              <li>Train anywhere, any schedule</li>
-              <li>Custom app workouts &amp; nutrition</li>
-              <li>Ongoing check-ins &amp; support</li>
+              <li data-key="price.pt.feat1">In-person 1:1 in Southside Glasgow</li>
+              <li data-key="price.pt.feat2">£40 an hour, fully tailored to you</li>
+              <li data-key="price.pt.feat3">Real coaching, real accountability</li>
             </ul>
-            <a href="#booking" class="btn btn--dark">Coach me online</a>
+            <a href="#contact" class="btn btn--dark">Train with Joe</a>
           </article>
         </div>
-        <p class="pricing__note">Exact rates depend on what you build together — you'll get them at your <a href="#booking">free consult</a>, before you commit to a thing.</p>
+        <p class="pricing__note">First class on the house. No lock-ins, no hidden fees — just <a href="#contact">message Joe</a> and we'll get you started.</p>
       </div>
     </section>
 
@@ -334,7 +338,7 @@
         <div class="about__media reveal">
           <!-- Brand panel until Joe's portrait arrives — then swap --img-about in styles.css
                to his photo, delete the inline SVG and restore the "Joe Wilson" tag. -->
-          <div class="media media--about" aria-hidden="true">
+          <div class="media media--about" aria-hidden="true" data-key="img.about">
             <svg class="media__mark" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
               <path d="M44 14s2 6 2 12c0 12-6 22-18 25-5-9-4-19 3-26 6-6 13-11 13-11z" fill="#a7cf6a"/>
               <path d="M40 19c-7 4-13 9-17 15" stroke="#222a15" stroke-width="2.4" stroke-linecap="round" fill="none"/>
@@ -344,29 +348,30 @@
           </div>
           <div class="about__badge">
             <span class="about__badge-no">Qualified</span>
-            <span class="about__badge-text">L2 + L3<br />Coach</span>
+            <span class="about__badge-text">L3 PT<br />&amp; S&amp;C</span>
           </div>
         </div>
 
         <div class="about__copy reveal" data-reveal-delay="1">
           <p class="eyebrow"><span class="eyebrow__no">03</span> The story</p>
-          <h2 class="section__title">Boxer first. Plant-powered now.</h2>
-          <p>
+          <h2 class="section__title" data-key="about.title">Boxer first. Plant-fuelled now.</h2>
+          <p data-key="about.body1">
             I'm Joe, based in <strong>Southside Glasgow</strong>. I've been boxing and training since I
             was 16, and after years of competing I made the switch to a fully plant-based lifestyle.
-            Today I'm a <strong>qualified Level 2 &amp; 3 coach</strong>, turning a lifelong passion
-            into a career.
+            Today I'm a <strong>Level 3 Personal Trainer and Level 3 Nutrition coach</strong>
+            (Bodycore), qualified in Strength &amp; Conditioning through Enhanced Sports Performance —
+            turning a lifelong passion into a career.
           </p>
-          <p>
+          <p data-key="about.body2">
             My approach is simple: help you reach your goals — <em>physically and mentally</em> —
             whatever your lifestyle. Plant-based or not, I'll meet you where you are and build training
             and nutrition around your life.
           </p>
           <ul class="about__list">
-            <li><strong>Boxing &amp; training since 16</strong> — it's in the blood</li>
-            <li><strong>Plant-based lifestyle</strong> — after years of competing</li>
-            <li><strong>Qualified Level 2 &amp; 3 coach</strong> — properly certified</li>
-            <li><strong>All lifestyles welcome</strong> — your plan, your way</li>
+            <li data-key="about.point1"><strong>Boxing &amp; training since 16</strong> — it's in the blood</li>
+            <li data-key="about.point2"><strong>Plant-based lifestyle</strong> — after years of competing</li>
+            <li data-key="about.point3"><strong>L3 PT · L3 Nutrition · S&amp;C</strong> — properly qualified, not winging it</li>
+            <li data-key="about.point4"><strong>All lifestyles welcome</strong> — your plan, your way</li>
           </ul>
           <a href="#contact" class="btn btn--dark">Work with Joe</a>
         </div>
@@ -445,24 +450,24 @@
     <section class="section leadmagnet">
       <div class="shell leadmagnet__inner">
         <div class="reveal">
-          <p class="eyebrow"><span class="eyebrow__no">✦</span> Free guide</p>
-          <h2 class="section__title">Get the free Plant-Strong Starter.</h2>
-          <p>A simple 7-day kickstart — training plus plant-based nutrition basics to get you moving. Straight to your inbox, no spam.</p>
-          <form class="lead-form" id="lead-form" data-lead-form novalidate>
+          <p class="eyebrow"><span class="eyebrow__no">✦</span> Start free</p>
+          <h2 class="section__title">Try it free. Then decide.</h2>
+          <p>Your first class is on me — or grab a <strong>free trial week of online programming</strong> to feel how it works. Drop your email and I'll send the details, plus my fortnightly note: a real week of training, what's working, no fluff.</p>
+          <form class="lead-form" id="lead-form" data-capture-form data-source="lead-magnet" data-success="You're in — Joe will email your free-trial details shortly. 🌱" novalidate>
             <input type="email" name="email" placeholder="you@email.com" aria-label="Your email address" required />
-            <button type="submit" class="btn btn--accent">Send it to me</button>
+            <button type="submit" class="btn btn--accent">Send me the details</button>
             <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
           </form>
           <label class="consent">
             <!-- lives outside the <form> tag for layout; form="" keeps it part of the form -->
             <input type="checkbox" name="consent" form="lead-form" required />
-            <span>Email me the free guide &amp; occasional plant-powered tips — unsubscribe anytime.</span>
+            <span>Email me my free trial &amp; Joe's fortnightly training note — unsubscribe anytime.</span>
           </label>
-          <p class="lead-form__note" data-lead-note role="status" aria-live="polite">Free download · No spam, ever.</p>
+          <p class="lead-form__note" data-capture-note role="status" aria-live="polite">Free to start · No spam, ever.</p>
           <p class="form__legal form__legal--left"><a href="privacy.html">How your details are handled</a></p>
         </div>
         <div class="leadmagnet__visual reveal" data-reveal-delay="1">
-          <div class="lm-cover">Plant-Strong<br />Starter Guide</div>
+          <div class="lm-cover">First class<br />free</div>
         </div>
       </div>
     </section>
@@ -474,8 +479,8 @@
       <div class="shell">
         <header class="section__head reveal">
           <p class="eyebrow"><span class="eyebrow__no">✦</span> In the gym &amp; beyond</p>
-          <h2 class="section__title">A look at the work.</h2>
-          <p class="section__intro">Group sessions, plant-based fuel and the day-to-day — a glimpse of what training with Joe looks like.</p>
+          <h2 class="section__title" data-key="gallery.title">A look at the work.</h2>
+          <p class="section__intro" data-key="gallery.intro">Group sessions, plant-based fuel and the day-to-day — a glimpse of what training with Joe looks like.</p>
         </header>
         <div class="gallery__grid">
           <figure class="gallery__item reveal">
@@ -484,7 +489,7 @@
               <source type="image/webp" sizes="(max-width: 720px) 100vw, 45vw" srcset="images/bootcamp-400.webp 400w, images/bootcamp-800.webp 800w, images/bootcamp-1200.webp 1200w, images/bootcamp-1600.webp 1600w" />
               <img src="images/bootcamp.jpg" alt="Joe coaching an outdoor group session" width="1918" height="2556" loading="lazy" decoding="async" />
             </picture>
-            <figcaption class="gallery__cap">Group sessions</figcaption>
+            <figcaption class="gallery__cap" data-key="gallery.cap1">Group sessions</figcaption>
           </figure>
           <figure class="gallery__item reveal">
             <picture>
@@ -492,7 +497,7 @@
               <source type="image/webp" sizes="(max-width: 720px) 100vw, 45vw" srcset="images/meal-prep-400.webp 400w, images/meal-prep-800.webp 800w, images/meal-prep-1200.webp 1200w, images/meal-prep-1440.webp 1440w" />
               <img src="images/meal-prep.jpg" alt="Plant-based meal-prep containers" width="1440" height="959" loading="lazy" decoding="async" />
             </picture>
-            <figcaption class="gallery__cap">Plant-based fuel</figcaption>
+            <figcaption class="gallery__cap" data-key="gallery.cap2">Plant-based fuel</figcaption>
           </figure>
         </div>
       </div>
@@ -506,9 +511,9 @@
       <div class="shell plantgames__inner">
         <div class="plantgames__copy reveal">
           <p class="eyebrow eyebrow--light"><span class="eyebrow__no">04</span> The event</p>
-          <h2 class="plantgames__title">The Plant Games <span class="plantgames__ver">3.0</span></h2>
-          <p class="plantgames__lead">
-            Glasgow's plant-powered fitness event is back. Test yourself, meet the community and find out
+          <h2 class="plantgames__title"><span data-key="plantgames.title">The Plant Games</span> <span class="plantgames__ver" data-key="plantgames.ver">3.0</span></h2>
+          <p class="plantgames__lead" data-key="plantgames.lead">
+            Glasgow's plant-fuelled fitness event is back. Test yourself, meet the community and find out
             what plant-fuelled training is really capable of. All levels welcome.
           </p>
           <div class="plantgames__actions">
@@ -520,9 +525,9 @@
           </div>
         </div>
         <div class="plantgames__meta reveal" data-reveal-delay="1">
-          <div class="pg-meta"><span class="pg-meta__label">Where</span><span class="pg-meta__val">Glasgow</span></div>
-          <div class="pg-meta"><span class="pg-meta__label">Who</span><span class="pg-meta__val">All levels</span></div>
-          <div class="pg-meta"><span class="pg-meta__label">Booking</span><span class="pg-meta__val">Via TeamUp</span></div>
+          <div class="pg-meta"><span class="pg-meta__label">Where</span><span class="pg-meta__val" data-key="plantgames.where">Glasgow</span></div>
+          <div class="pg-meta"><span class="pg-meta__label">Who</span><span class="pg-meta__val" data-key="plantgames.who">All levels</span></div>
+          <div class="pg-meta"><span class="pg-meta__label">Booking</span><span class="pg-meta__val" data-key="plantgames.booking">Via TeamUp</span></div>
         </div>
       </div>
     </section>
@@ -534,18 +539,18 @@
       <div class="shell">
         <header class="section__head reveal">
           <p class="eyebrow"><span class="eyebrow__no">05</span> The shop</p>
-          <h2 class="section__title">Wear the message.</h2>
-          <p class="section__intro">Tees, jumpers and plant-powered kit from The Plant PT Shop.</p>
+          <h2 class="section__title" data-key="shop.title">Wear the message.</h2>
+          <p class="section__intro" data-key="shop.intro">Tees, jumpers and plant-fuelled kit from The Plant PT Shop.</p>
         </header>
 
         <div class="shop__grid">
           <a class="merch reveal" href="https://theplantptshop.com" target="_blank" rel="noopener">
-            <div class="merch__media merch__media--1"><span class="merch__tag">Apparel</span></div>
-            <div class="merch__row"><span>Apparel</span><span class="merch__cta">Shop →</span></div>
+            <div class="merch__media merch__media--1" data-key="img.merch1"><span class="merch__tag">Apparel</span></div>
+            <div class="merch__row"><span data-key="shop.item1">Apparel</span><span class="merch__cta">Shop →</span></div>
           </a>
           <a class="merch reveal" data-reveal-delay="1" href="https://theplantptshop.com" target="_blank" rel="noopener">
-            <div class="merch__media merch__media--2"><span class="merch__tag">Merch</span></div>
-            <div class="merch__row"><span>Plant PT Socks</span><span class="merch__cta">Shop →</span></div>
+            <div class="merch__media merch__media--2" data-key="img.merch2"><span class="merch__tag">Merch</span></div>
+            <div class="merch__row"><span data-key="shop.item2">Plant PT Socks</span><span class="merch__cta">Shop →</span></div>
           </a>
           <a class="merch merch--cta reveal" data-reveal-delay="2" href="https://theplantptshop.com" target="_blank" rel="noopener">
             <picture>
@@ -553,11 +558,54 @@
               <source type="image/webp" srcset="assets/logo-400.webp" />
               <img src="assets/logo.jpg" alt="The Plant PT logo" width="88" height="88" loading="lazy" decoding="async" />
             </picture>
-            <div class="merch__row"><strong>Everything else</strong><span class="merch__cta">Browse the full shop →</span></div>
+            <div class="merch__row"><strong data-key="shop.item3">Everything else</strong><span class="merch__cta">Browse the full shop →</span></div>
           </a>
         </div>
         <div class="shop__foot reveal">
           <a href="https://theplantptshop.com" target="_blank" rel="noopener" class="btn btn--dark">Visit the full shop</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         THE PLANT PREP (email capture → /api/subscribe, source "meal-prep")
+         Primary action is the email signup; the full menu lives on
+         the-plant-prep.html. The order form (/api/order + D1 meal_orders) is
+         staged for phase 2 — see functions/api/order.js, no UI yet.
+    ============================================================ -->
+    <section class="section mealprep" id="meal-prep">
+      <div class="shell mealprep__grid">
+        <div class="mealprep__copy reveal">
+          <p class="eyebrow"><span class="eyebrow__no">✦</span> The Plant Prep</p>
+          <h2 class="section__title" data-key="mealprep.title">Macros done for you. Every diet covered.</h2>
+          <p class="mealprep__intro" data-key="mealprep.intro">
+            Chef-prepped meals, portioned for your week with the macros already worked out — from
+            high-protein meat dishes to fully vegan. Breakfast and dinner, ready when you are.
+          </p>
+          <ul class="mealprep__points">
+            <li data-key="mealprep.point1">Every meal macro-tracked — calories &amp; protein/carbs/fat</li>
+            <li data-key="mealprep.point2">Meat, veggie &amp; vegan options on the menu</li>
+            <li data-key="mealprep.point3">Fresh, local, and properly seasoned</li>
+          </ul>
+          <a href="the-plant-prep.html" class="btn btn--dark">See the full menu <span aria-hidden="true">→</span></a>
+        </div>
+
+        <div class="mealprep__form-wrap reveal" data-reveal-delay="1">
+          <p class="mealprep__signup-eyebrow">Be first to order</p>
+          <h3 class="mealprep__signup-title" data-key="mealprep.signupTitle">Join the Plant Prep list</h3>
+          <p class="mealprep__signup-sub" data-key="mealprep.signupSub">Get the weekly menu and early access, straight to your inbox.</p>
+          <form class="lead-form" id="prep-form" data-capture-form data-source="meal-prep" data-success="You're on the Plant Prep list — Joe will send the weekly menu. 🌱" novalidate>
+            <input type="email" name="email" placeholder="you@email.com" aria-label="Your email address" required />
+            <button type="submit" class="btn btn--accent">Join the list</button>
+            <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          </form>
+          <label class="consent">
+            <!-- outside the <form> for layout; form="prep-form" keeps it in the form -->
+            <input type="checkbox" name="consent" form="prep-form" required />
+            <span>Email me the Plant Prep menu &amp; updates — unsubscribe anytime.</span>
+          </label>
+          <p class="lead-form__note" data-capture-note role="status" aria-live="polite">Free to join · No spam, ever.</p>
+          <p class="form__legal form__legal--left"><a href="privacy.html">How your details are handled</a></p>
         </div>
       </div>
     </section>
@@ -569,19 +617,19 @@
       <div class="shell">
         <header class="section__head reveal">
           <p class="eyebrow"><span class="eyebrow__no">06</span> Recommended gear</p>
-          <h2 class="section__title">What I actually use — and a discount for you.</h2>
-          <p class="section__intro">Brands I stand behind, with my codes to save you money.</p>
+          <h2 class="section__title" data-key="gear.title">What I actually use — and a discount for you.</h2>
+          <p class="section__intro" data-key="gear.intro">Brands I stand behind, with my codes to save you money.</p>
         </header>
 
         <div class="gear__grid">
           <article class="affiliate reveal">
-            <div class="affiliate__media affiliate__media--vivo"><span class="affiliate__type">👟 Footwear</span></div>
+            <div class="affiliate__media affiliate__media--vivo" data-key="img.vivo"><span class="affiliate__type">👟 Footwear</span></div>
             <div class="affiliate__body">
-              <h3 class="affiliate__name">Vivobarefoot</h3>
-              <p>Barefoot shoes that let your feet move the way nature intended — for training and everyday.</p>
+              <h3 class="affiliate__name" data-key="gear.vivo.name">Vivobarefoot</h3>
+              <p data-key="gear.vivo.body">Barefoot shoes that let your feet move the way nature intended — for training and everyday.</p>
               <div class="codeblock" data-copy-wrap>
                 <div>
-                  <span class="codeblock__label">My code</span>
+                  <span class="codeblock__label" data-key="gear.vivo.codeLabel">My code</span>
                   <span class="codeblock__code" data-code>VPRO20</span>
                 </div>
                 <button class="codeblock__btn" data-copy="VPRO20" type="button" aria-live="polite">Copy</button>
@@ -591,13 +639,13 @@
           </article>
 
           <article class="affiliate reveal" data-reveal-delay="1">
-            <div class="affiliate__media affiliate__media--spartan"><span class="affiliate__type">💪 Protein</span></div>
+            <div class="affiliate__media affiliate__media--spartan" data-key="img.spartan"><span class="affiliate__type">💪 Protein</span></div>
             <div class="affiliate__body">
-              <h3 class="affiliate__name">Spartan Protein</h3>
-              <p>Plant-based protein and supplements I use and trust to fuel training and recovery.</p>
+              <h3 class="affiliate__name" data-key="gear.spartan.name">Spartan Protein</h3>
+              <p data-key="gear.spartan.body">Plant-based protein and supplements I use and trust to fuel training and recovery. <strong>Use my code for 30% off.</strong></p>
               <div class="codeblock" data-copy-wrap>
                 <div>
-                  <span class="codeblock__label">My code</span>
+                  <span class="codeblock__label" data-key="gear.spartan.codeLabel">My code · 30% off</span>
                   <span class="codeblock__code" data-code>PLANTPT</span>
                 </div>
                 <button class="codeblock__btn" data-copy="PLANTPT" type="button" aria-live="polite">Copy</button>
@@ -616,39 +664,39 @@
       <div class="shell">
         <header class="section__head reveal">
           <p class="eyebrow"><span class="eyebrow__no">✦</span> Good to know</p>
-          <h2 class="section__title">Questions, answered.</h2>
-          <p class="section__intro">The things most people ask before they get started.</p>
+          <h2 class="section__title" data-key="faq.title">Questions, answered.</h2>
+          <p class="section__intro" data-key="faq.intro">The things most people ask before they get started.</p>
         </header>
 
         <div class="faq__list">
           <details class="faq__item reveal">
-            <summary>Do I need to be vegan or plant-based to train with you?<span class="faq__icon" aria-hidden="true">+</span></summary>
+            <summary><span data-key="faq.q1">Do I need to be vegan or plant-based to train with you?</span><span class="faq__icon" aria-hidden="true">+</span></summary>
             <div class="faq__a">
-              <p>Not at all. Plenty of my clients aren't plant-based — your training and nutrition are built around <em>your</em> diet, whether that's plant-based, omnivore or anywhere in between. The plant bit is my story, not a requirement.</p>
+              <p data-key="faq.a1">Not at all. Plenty of my clients aren't plant-based — your training and nutrition are built around <em>your</em> diet, whether that's plant-based, omnivore or anywhere in between. The plant bit is my story, not a requirement.</p>
             </div>
           </details>
           <details class="faq__item reveal">
-            <summary>I've never boxed or trained before — will I keep up?<span class="faq__icon" aria-hidden="true">+</span></summary>
+            <summary><span data-key="faq.q2">I've never boxed or trained before — will I keep up?</span><span class="faq__icon" aria-hidden="true">+</span></summary>
             <div class="faq__a">
-              <p>Yes. Most people walk in nervous, and every session is scaled to your level. No experience needed — I'll coach you through proper technique from day one, at your pace.</p>
+              <p data-key="faq.a2">Yes. Most people walk in nervous, and every session is scaled to your level. No experience needed — I'll coach you through proper technique from day one, at your pace.</p>
             </div>
           </details>
           <details class="faq__item reveal">
-            <summary>Where do sessions happen?<span class="faq__icon" aria-hidden="true">+</span></summary>
+            <summary><span data-key="faq.q3">Where do sessions happen?</span><span class="faq__icon" aria-hidden="true">+</span></summary>
             <div class="faq__a">
-              <p>In-person training happens around Southside Glasgow, including outdoor group sessions. Not local? Online coaching works anywhere — custom app workouts, nutrition guidance and weekly check-ins.</p>
+              <p data-key="faq.a3">In-person training happens around Southside Glasgow, including outdoor group sessions. Not local? Online coaching works anywhere — custom app workouts, nutrition guidance and weekly check-ins.</p>
             </div>
           </details>
           <details class="faq__item reveal">
-            <summary>How much does it cost?<span class="faq__icon" aria-hidden="true">+</span></summary>
+            <summary><span data-key="faq.q4">How much does it cost?</span><span class="faq__icon" aria-hidden="true">+</span></summary>
             <div class="faq__a">
-              <p>It depends what we build together — 1:1 sessions, online coaching or a 12-week block. Book the <a href="#booking">free 15-minute consult</a> and you'll get exact rates with no pressure, no lock-ins and no hidden fees.</p>
+              <p data-key="faq.a4">It's all on the page — group classes are £12 with your first one free, online programming starts at £55 a month, and 1:1 training is £40 a session (£160 for a block of four). No lock-ins, no hidden fees, and a <a href="#contact">free chat</a> before you commit to anything.</p>
             </div>
           </details>
           <details class="faq__item reveal">
-            <summary>What happens after I send an enquiry?<span class="faq__icon" aria-hidden="true">+</span></summary>
+            <summary><span data-key="faq.q5">What happens after I send an enquiry?</span><span class="faq__icon" aria-hidden="true">+</span></summary>
             <div class="faq__a">
-              <p>It comes straight to me — I personally reply to every enquiry, usually within a day or two. We'll set up a free, no-obligation chat about your goals. No spam, no hard sell.</p>
+              <p data-key="faq.a5">It comes straight to me — I personally reply to every enquiry, usually within 24–48 hours. We'll set up a free, no-obligation chat about your goals. No spam, no hard sell.</p>
             </div>
           </details>
         </div>
@@ -662,13 +710,13 @@
       <div class="shell">
         <div class="booking__inner reveal">
           <p class="eyebrow"><span class="eyebrow__no">07</span> Free consult</p>
-          <h2>Not sure where to start? Let's talk.</h2>
-          <p>Book a free, no-pressure 15-minute consult. We'll talk through your goals and find the right way to train — plant-based or not.</p>
+          <h2 data-key="booking.title">Not sure where to start? Let's talk.</h2>
+          <p data-key="booking.body">Book a free, no-pressure 15-minute consult. We'll talk through your goals and find the right way to train — plant-based or not.</p>
           <a href="#contact" class="btn btn--accent">
             Book your free consult
             <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
-          <p class="booking__risk">No cost · No obligation · Just a chat</p>
+          <p class="booking__risk" data-key="booking.risk">No cost · No obligation · Just a chat</p>
         </div>
       </div>
     </section>
@@ -680,34 +728,29 @@
       <div class="shell contact__grid">
         <div class="contact__copy reveal">
           <p class="eyebrow"><span class="eyebrow__no">08</span> Start today</p>
-          <h2 class="section__title">Let's build your plan.</h2>
-          <p class="contact__intro">
+          <h2 class="section__title" data-key="contact.title">Let's build your plan.</h2>
+          <p class="contact__intro" data-key="contact.intro">
             Tell me a little about your goals and I'll be in touch to find the right way to train.
             No pressure, no jargon — just a real conversation about getting you where you want to be.
           </p>
 
           <div class="channels">
-            <!-- NOTE: replace the href values with Joe's real details (see README) -->
-            <!-- WhatsApp hidden until Joe provides a real number — restore with his real wa.me link:
-            <a class="channel" href="https://wa.me/440000000000" target="_blank" rel="noopener" data-channel="whatsapp">
+            <a class="channel" href="https://wa.me/447771400557" target="_blank" rel="noopener" data-channel="whatsapp">
               <span class="channel__icon" aria-hidden="true">💬</span>
               <span><span class="channel__label">WhatsApp</span><span class="channel__val">Message Joe directly</span></span>
             </a>
-            -->
             <a class="channel" href="https://www.instagram.com/the_plant_pt/" target="_blank" rel="noopener" data-channel="instagram">
               <span class="channel__icon" aria-hidden="true">📸</span>
               <span><span class="channel__label">Instagram DM</span><span class="channel__val">@the_plant_pt</span></span>
             </a>
-            <a class="channel" href="mailto:hello@plantpt.co.uk" data-channel="email">
+            <a class="channel" href="mailto:theplantpt@gmail.com" data-channel="email">
               <span class="channel__icon" aria-hidden="true">✉️</span>
-              <span><span class="channel__label">Email</span><span class="channel__val">hello@plantpt.co.uk</span></span>
+              <span><span class="channel__label">Email</span><span class="channel__val">theplantpt@gmail.com</span></span>
             </a>
-            <!-- Phone hidden until Joe provides a real number — restore with his real tel: link:
-            <a class="channel" href="tel:+440000000000" data-channel="phone">
+            <a class="channel" href="tel:+447771400557" data-channel="phone">
               <span class="channel__icon" aria-hidden="true">📞</span>
-              <span><span class="channel__label">Phone</span><span class="channel__val">Call or text</span></span>
+              <span><span class="channel__label">Phone</span><span class="channel__val">07771 400557</span></span>
             </a>
-            -->
           </div>
         </div>
 
@@ -785,15 +828,11 @@
   <footer class="footer">
     <div class="shell footer__inner">
       <div class="footer__brand">
-        <picture>
-          <source type="image/avif" srcset="assets/logo-400.avif" />
-          <source type="image/webp" srcset="assets/logo-400.webp" />
-          <img class="footer__logo" src="assets/logo.jpg" alt="The Plant PT logo" width="56" height="56" loading="lazy" decoding="async" />
-        </picture>
+        <img class="footer__logo" src="assets/brand/mark-cream.png" alt="The Plant PT logo" width="32" height="56" loading="lazy" decoding="async" />
         <span class="brand brand--footer">
           <span class="brand__text">The Plant&nbsp;PT</span>
         </span>
-        <p>Plant-powered personal training &amp; boxing coaching in Glasgow. Stronger body, healthier mind — your way.</p>
+        <p data-key="footer.tagline">Plant-fuelled personal training &amp; boxing coaching in Glasgow. Stronger body, healthier mind — your way.</p>
         <div class="footer__codes">
           <span>Vivobarefoot <strong>VPRO20</strong></span>
           <span>Spartan Protein <strong>PLANTPT</strong></span>
@@ -807,6 +846,7 @@
         <a href="#about">About Joe</a>
         <a href="#plant-games">Plant Games</a>
         <a href="#shop">Shop</a>
+        <a href="#meal-prep">Meal prep</a>
         <a href="#gear">Recommended gear</a>
       </nav>
 
@@ -814,6 +854,7 @@
         <h3>Connect</h3>
         <a href="https://www.instagram.com/the_plant_pt/" target="_blank" rel="noopener">Instagram</a>
         <a href="https://theplantptshop.com" target="_blank" rel="noopener">The Plant PT Shop</a>
+        <a href="the-plant-prep.html">The Plant Prep menu</a>
         <a href="https://goteamup.com/p/2381448-two-birds/c/schedule" target="_blank" rel="noopener">Class schedule</a>
         <a href="#contact">Contact</a>
       </nav>
@@ -840,5 +881,7 @@
        The vendored Lenis lib was removed: its scrollTo silently no-ops and it pinned the
        page during anchor jumps, killing every in-page CTA when it loaded. -->
   <script src="js/main.js"></script>
+  <!-- Applies any admin text overrides over the baked-in copy (falls back silently). -->
+  <script src="js/content.js"></script>
 </body>
 </html>

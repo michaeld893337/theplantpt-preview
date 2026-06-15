@@ -21,7 +21,7 @@
   var CONFIG = {
     FORM_ENDPOINT: "https://api.web3forms.com/submit", // Web3Forms (default — leave as is)
     WEB3FORMS_KEY: "",                 // ← paste your free Web3Forms access key here to go live
-    CONTACT_EMAIL: "hello@plantpt.co.uk" // mailto fallback used until a key is added
+    CONTACT_EMAIL: "theplantpt@gmail.com" // mailto fallback used until a key is added
   };
 
   var prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -315,7 +315,7 @@
       title.textContent = first ? "Got it, " + first + " — enquiry sent." : "Got it — enquiry sent.";
 
       var p = document.createElement("p");
-      p.textContent = "Joe personally reads every enquiry and will get back to you, usually within a day or two. Keep an eye on your inbox — and your spam folder, just in case.";
+      p.textContent = "Joe personally reads every enquiry and will get back to you, usually within 24–48 hours. Keep an eye on your inbox — and your spam folder, just in case.";
 
       var ig = document.createElement("a");
       ig.className = "btn btn--dark";
@@ -331,38 +331,54 @@
     }
   }
 
-  /* ---------- lead-magnet email capture ---------- */
-  var leadForm = document.querySelector("[data-lead-form]");
-  if (leadForm) {
-    var leadNote = document.querySelector("[data-lead-note]");
-    var leadDefault = leadNote ? leadNote.textContent : "";
-    var leadEmail = leadForm.querySelector("input[type=email]");
-    leadForm.addEventListener("submit", function (e) {
+  /* ---------- email capture (free-trial lead magnet + Plant Prep signup) ----------
+     One handler drives every [data-capture-form]: the free-trial signup and the
+     Plant Prep meal-prep signup (incl. the same form on the menu page). Each form
+     declares its own data-source (segments the lead in D1 / MailerLite) and
+     data-success copy. The consent box may sit OUTSIDE the <form> via form="<id>",
+     so it's read through form.elements (querySelector wouldn't see it). The status
+     note is a sibling of the form, so we scope it to the form's parent — that keeps
+     two capture forms on one page from sharing a note. */
+  var EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+  $$("[data-capture-form]").forEach(function (form) {
+    var note = form.parentElement ? form.parentElement.querySelector("[data-capture-note]") : null;
+    var noteDefault = note ? note.textContent : "";
+    var emailEl = form.querySelector("input[type=email]");
+    var source = form.getAttribute("data-source") || "lead-magnet";
+    var successMsg = form.getAttribute("data-success") || "You're on the list. 🌱";
+
+    function setNote(msg, success) {
+      if (!note) return;
+      note.textContent = msg;
+      note.classList.toggle("is-success", !!success);
+    }
+
+    form.addEventListener("submit", function (e) {
       e.preventDefault();
-      var ok = leadEmail && /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(leadEmail.value);
-      if (!ok) { if (leadEmail) leadEmail.focus(); if (leadNote) { leadNote.textContent = "Please enter a valid email."; leadNote.classList.remove("is-success"); } return; }
-      // consent required for the marketing list (GDPR) — the checkbox sits
-      // outside the <form> tag (form="lead-form"), so go via .elements, which
-      // includes form-attribute-associated controls; querySelector wouldn't.
-      var leadConsent = leadForm.elements.consent;
-      if (leadConsent && !leadConsent.checked) {
-        leadConsent.focus();
-        if (leadNote) { leadNote.textContent = "Please tick the box to get the guide."; leadNote.classList.remove("is-success"); }
+      if (!emailEl || !EMAIL_RE.test(emailEl.value)) {
+        if (emailEl) emailEl.focus();
+        setNote("Please enter a valid email.");
         return;
       }
-      var leadHoneypot = (leadForm.querySelector("[name=website]") || {}).value || "";
-      if (leadNote) { leadNote.textContent = "Sending…"; leadNote.classList.remove("is-success"); }
+      var consent = form.elements.consent;
+      if (consent && !consent.checked) {
+        consent.focus();
+        setNote("Please tick the box so Joe can email you.");
+        return;
+      }
+      var honeypot = (form.querySelector("[name=website]") || {}).value || "";
+      setNote("Sending…");
 
-      // Capture the email in our own backend (Cloudflare D1).
       fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ source: "lead-magnet", email: leadEmail.value, consent: !!(leadConsent && leadConsent.checked), website: leadHoneypot })
+        body: JSON.stringify({ source: source, email: emailEl.value, consent: !!(consent && consent.checked), website: honeypot })
       })
       .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
-      .then(function () { leadForm.reset(); if (leadNote) { leadNote.textContent = "You're on the list — Joe will email your guide shortly. 🌱"; leadNote.classList.add("is-success"); } })
-      .catch(function () { if (leadNote) { leadNote.textContent = "Hmm, that didn't send — please try again."; } });
+      .then(function () { form.reset(); setNote(successMsg, true); })
+      .catch(function () { setNote("Hmm, that didn't send — please try again."); });
     });
-    if (leadEmail) leadEmail.addEventListener("input", function () { if (leadNote && !leadNote.classList.contains("is-success")) leadNote.textContent = leadDefault; });
-  }
+
+    if (emailEl) emailEl.addEventListener("input", function () { if (note && !note.classList.contains("is-success")) note.textContent = noteDefault; });
+  });
 })();
