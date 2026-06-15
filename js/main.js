@@ -117,10 +117,25 @@
       if (target.tabIndex < 0 && !target.hasAttribute("tabindex")) {
         target.setAttribute("tabindex", "-1");   // sections aren't natively focusable
       }
+      // Links in the nav bar / mobile menu jump straight to the section — picking
+      // a destination from the menu shouldn't animate-scroll past the whole site.
+      // In-page CTAs ("Start training" etc.) keep the guided smooth scroll.
+      var instant = prefersReduced || a.closest(".nav__links, .mobile-menu");
       // Focus BEFORE starting the scroll — moving focus cancels an in-flight
       // smooth scroll in Chrome, even with preventScroll: true.
       target.focus({ preventScroll: true });
-      target.scrollIntoView({ behavior: prefersReduced ? "auto" : "smooth", block: "start" });
+      if (instant) {
+        // NB: scrollIntoView "auto" isn't instant — it inherits the page's
+        // `scroll-behavior: smooth`. Flip that to auto for the one jump, then
+        // restore. Works on every browser (no reliance on the "instant" keyword).
+        var root = document.documentElement;
+        var prevBehavior = root.style.scrollBehavior;
+        root.style.scrollBehavior = "auto";
+        target.scrollIntoView({ block: "start" });
+        root.style.scrollBehavior = prevBehavior;
+      } else {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     });
   });
 

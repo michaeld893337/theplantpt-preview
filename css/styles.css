@@ -286,11 +286,6 @@ body.menu-open { overflow: hidden; }
 .media--about { background-color: #222a15; background-image: url('../images/coach-portrait.jpg'); background-image: var(--img-about); background-position: 50% 35%; aspect-ratio: 4 / 5; }
 .media__mark { position: absolute; inset: 0; margin: auto; width: 54%; aspect-ratio: 1; opacity: .92; }
 
-.hero__chip { position: absolute; z-index: 3; background: var(--cream); color: var(--ink); font-weight: 600; font-size: .9rem; padding: .6rem 1rem; border-radius: 100px; box-shadow: var(--shadow); border: 1px solid var(--line); }
-.hero__chip--1 { top: 8%; left: -6%; animation: float 6s var(--ease) infinite; }
-.hero__chip--2 { bottom: 12%; right: -7%; animation: float 6s var(--ease) infinite .8s; }
-@keyframes float { 50% { transform: translateY(-10px); } }
-
 .hero__scroll { position: absolute; left: 50%; bottom: 1.7rem; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: .3rem; color: var(--ink-soft); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .2em; font-size: .66rem; }
 .hero__scroll svg { animation: bob 1.8s var(--ease) infinite; }
 @keyframes bob { 50% { transform: translateY(5px); } }
@@ -494,7 +489,7 @@ body.menu-open { overflow: hidden; }
 .footer__codes { display: flex; flex-wrap: wrap; gap: 1.2rem; margin-top: 1.4rem; font-family: var(--font-mono); font-size: .8rem; color: rgba(243,239,229,.55); }
 .footer__codes strong { color: var(--leaf-bright); }
 .footer__nav { display: flex; flex-direction: column; gap: .6rem; }
-.footer__nav h4 { font-family: var(--font-mono); font-size: .74rem; text-transform: uppercase; letter-spacing: .15em; color: var(--leaf-bright); font-weight: 500; margin-bottom: .4rem; }
+.footer__nav h3 { font-family: var(--font-mono); font-size: .74rem; text-transform: uppercase; letter-spacing: .15em; color: var(--leaf-bright); font-weight: 500; margin-bottom: .4rem; }
 .footer__nav a { color: rgba(243,239,229,.75); transition: color .2s, padding-left .25s var(--ease); }
 .footer__nav a:hover { color: var(--paper); padding-left: 5px; }
 .footer__base { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding-top: 1.6rem; font-family: var(--font-mono); font-size: .78rem; color: rgba(243,239,229,.5); }
@@ -517,7 +512,7 @@ body.menu-open { overflow: hidden; }
 .reveal[data-reveal-delay="4"] { transition-delay: .36s; }
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
-  .marquee__track, .hero__chip, .kicker__dot, .hero__scroll svg { animation: none; }
+  .marquee__track, .kicker__dot, .hero__scroll svg { animation: none; }
 }
 
 /* ====================== 17b · MERCH CTA TILE ===================== */
@@ -597,7 +592,10 @@ body.menu-open { overflow: hidden; }
 .booking__inner .eyebrow { color: var(--leaf-bright); justify-content: center; }
 .booking h2 { font-size: clamp(2rem, 4.5vw, 3.2rem); color: var(--paper); max-width: 18ch; margin: 1rem auto; }
 .booking__inner > p { color: rgba(243,239,229,.82); max-width: 46ch; margin: 0 auto 2rem; }
-.booking__risk { margin-top: 1.3rem; font-family: var(--font-mono); font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; color: var(--leaf-bright); }
+/* The risk line is a direct child <p>, so the rule above ((0,1,1) specificity)
+   would otherwise zero its top margin and leave the button flush against it.
+   Out-specify it here so the button sits centred: 2rem of air above and below. */
+.booking__inner > p.booking__risk { margin: 2rem auto 0; font-family: var(--font-mono); font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; color: var(--leaf-bright); }
 
 /* ====================== LEAD MAGNET ====================== */
 .leadmagnet { background: #d3e0c4; }
@@ -611,7 +609,25 @@ body.menu-open { overflow: hidden; }
 .lead-form__note { margin-top: .85rem; font-size: .85rem; color: var(--ink-soft); }
 .lead-form__note.is-success { color: var(--moss); font-weight: 600; }
 .leadmagnet__visual { background: var(--cream); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.5rem; box-shadow: var(--shadow); }
-.lm-cover { aspect-ratio: 4 / 5; border-radius: var(--radius-sm); background: linear-gradient(160deg, #2d3a24, #6f9457); display: grid; place-items: center; text-align: center; color: var(--paper); font-family: var(--font-display); font-size: 1.5rem; line-height: 1.15; padding: 1.2rem; }
+/* Class-work photo behind "First class free": a near-black base fades up into
+   the picture (the old flat green is gone). Text sits in the dark, photo up top. */
+.lm-cover {
+  aspect-ratio: 4 / 5; border-radius: var(--radius-sm); overflow: hidden;
+  background-image:
+    linear-gradient(180deg, rgba(8,10,6,.15) 0%, rgba(8,10,6,.48) 48%, rgba(7,9,5,.92) 100%),
+    url('../images/class-work-2.jpg');                       /* fallback if no image-set() */
+  background-image:
+    linear-gradient(180deg, rgba(8,10,6,.15) 0%, rgba(8,10,6,.48) 48%, rgba(7,9,5,.92) 100%),
+    image-set(
+      url('../images/class-work-2-800.avif') type('image/avif'),
+      url('../images/class-work-2-800.webp') type('image/webp'),
+      url('../images/class-work-2.jpg') type('image/jpeg'));
+  background-size: cover; background-position: 58% center;
+  display: grid; place-items: end center; text-align: center;
+  color: var(--paper); font-family: var(--font-display);
+  font-size: 1.6rem; line-height: 1.12; padding: 1.5rem;
+  text-shadow: 0 1px 14px rgba(0,0,0,.5);
+}
 
 @media (max-width: 980px) {
   .pricing__grid, .transform__grid { grid-template-columns: 1fr; max-width: 460px; margin-inline: auto; }
@@ -622,8 +638,6 @@ body.menu-open { overflow: hidden; }
 @media (max-width: 980px) {
   .hero__inner { grid-template-columns: 1fr; gap: 3rem; }
   .hero__media { max-width: 460px; }
-  .hero__chip--1 { left: 2%; }
-  .hero__chip--2 { right: 2%; }
   .about__grid, .plantgames__inner, .contact__grid, .mealprep__grid { grid-template-columns: 1fr; }
   .about__media { max-width: 460px; }
   .cards, .quotes, .shop__grid { grid-template-columns: repeat(2, 1fr); }
@@ -649,7 +663,6 @@ body.menu-open { overflow: hidden; }
 }
 
 @media (max-width: 420px) {
-  .hero__chip { display: none; }
   .about__badge { width: 96px; height: 96px; right: 0; } /* keep the badge inside narrow viewports */
 }
 
