@@ -15,17 +15,33 @@
   var nodes = Array.prototype.slice.call(document.querySelectorAll("[data-key]"));
   if (!nodes.length) return; // nothing editable on this page
 
+  function applyAll(content) {
+    nodes.forEach(function (el) {
+      var override = content[el.getAttribute("data-key")];
+      if (override && override.value != null) applyOverride(el, override.value, override.type);
+    });
+  }
+
+  /* Staging/preview overrides saved by the admin in preview mode — used on static
+     hosts (the GitHub preview) where there is no /api/content backend. Per-browser
+     only; the live site uses the API above instead. Shared key with admin/admin.js. */
+  function previewOverrides() {
+    try { return JSON.parse(localStorage.getItem("ppt_preview_content") || "{}") || {}; }
+    catch (e) { return {}; }
+  }
+
+  // Static hosts (the GitHub preview, an opened file) have no API — read the local
+  // preview edits directly and skip a fetch that would only 404 in the console.
+  var staticHost = location.hostname.indexOf("github.io") !== -1 || location.protocol === "file:";
+  if (staticHost) { applyAll(previewOverrides()); return; }
+
   fetch("/api/content")
     .then(function (r) { return r.ok ? r.json() : Promise.reject(new Error("HTTP " + r.status)); })
-    .then(function (data) {
-      var content = (data && data.content) || {};
-      nodes.forEach(function (el) {
-        var override = content[el.getAttribute("data-key")];
-        if (override && override.value != null) applyOverride(el, override.value, override.type);
-      });
-    })
+    .then(function (data) { applyAll((data && data.content) || {}); })
     .catch(function () {
-      /* Offline or API down — keep the baked-in defaults. Intentionally silent. */
+      /* No live backend (offline, or a static preview) — fall back to any local
+         preview edits so the staging site reflects them. Silent if there are none. */
+      applyAll(previewOverrides());
     });
 
   /* ===========================================================

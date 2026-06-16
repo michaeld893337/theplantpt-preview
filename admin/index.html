@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Admin · The Plant PT</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png" />
+  <style>
+    :root {
+      --forest: #2d3a24; --clay: #b85c34; --clay-ink: #a44b2c;
+      --paper: #f1efe6; --cream: #faf9f3; --ink: #232a1c; --ink-soft: #525b48; --line: #d9dac9;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: var(--paper); color: var(--ink); }
+    header { background: var(--forest); color: #f4f3e9; padding: 1rem 1.4rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .5rem; }
+    header h1 { font-size: 1.1rem; margin: 0; letter-spacing: .2px; }
+    header .who { font-size: .85rem; opacity: .85; }
+    main { max-width: 1100px; margin: 0 auto; padding: 1.4rem; }
+    .card { background: var(--cream); border: 1px solid var(--line); border-radius: 14px; padding: 1.2rem 1.3rem; margin-bottom: 1.3rem; }
+    .row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: .8rem; }
+    h2 { font-size: 1.05rem; margin: 0; }
+    .muted { color: var(--ink-soft); font-size: .9rem; }
+    .btn { display: inline-flex; align-items: center; gap: .4rem; background: var(--clay); color: #fff; text-decoration: none; border: 0; border-radius: 999px; padding: .55rem 1.1rem; font-size: .9rem; font-weight: 600; cursor: pointer; }
+    .btn:hover { background: var(--clay-ink); }
+    .btn--ghost { background: transparent; color: var(--clay-ink); border: 1px solid var(--line); }
+    table { width: 100%; border-collapse: collapse; font-size: .85rem; }
+    th, td { text-align: left; padding: .55rem .6rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-soft); }
+    td.email { font-weight: 600; }
+    .pill { display: inline-block; font-size: .68rem; text-transform: uppercase; letter-spacing: .05em; padding: .15rem .5rem; border-radius: 999px; background: #e8ece0; color: var(--forest); }
+    .pill--contact { background: #f5e3d8; color: var(--clay-ink); }
+    .gate { text-align: center; padding: 3rem 1rem; }
+    .gate h2 { margin-bottom: .6rem; }
+    .soon { border: 1px dashed var(--line); border-radius: 14px; padding: 1.2rem 1.3rem; color: var(--ink-soft); }
+    .empty { color: var(--ink-soft); padding: 1rem 0; }
+    code { background: #e8ece0; padding: .1rem .35rem; border-radius: 5px; font-size: .85em; }
+    /* Site-text editor */
+    details.cgroup { margin: 0 0 .6rem; border: 1px solid var(--line); border-radius: 10px; background: #fff; }
+    details.cgroup > summary { cursor: pointer; list-style: none; padding: .7rem .9rem; font-size: .74rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--clay-ink); display: flex; align-items: center; }
+    details.cgroup > summary::-webkit-details-marker { display: none; }
+    details.cgroup > summary::after { content: "▸"; margin-left: auto; opacity: .6; transition: transform .15s; }
+    details.cgroup[open] > summary { border-bottom: 1px solid var(--line); }
+    details.cgroup[open] > summary::after { transform: rotate(90deg); }
+    details.cgroup:has(.is-dirty) > summary { color: var(--clay); }
+    details.cgroup:has(.is-dirty) > summary::before { content: "• "; }
+    .cfield { display: grid; gap: .25rem; margin: .8rem .9rem; }
+    .cfield label { font-size: .82rem; font-weight: 600; }
+    .cfield .chint { font-weight: 400; color: var(--ink-soft); }
+    .cfield input, .cfield textarea { font: inherit; font-size: .9rem; padding: .5rem .6rem; border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--ink); width: 100%; }
+    .cfield textarea { min-height: 4.2rem; resize: vertical; line-height: 1.45; }
+    .cfield input:focus, .cfield textarea:focus { outline: 2px solid var(--clay); outline-offset: 1px; border-color: var(--clay); }
+    .cfield.is-dirty > label::after { content: " • edited"; color: var(--clay-ink); font-weight: 600; }
+    .cfield--img .imgrow { display: flex; gap: .8rem; align-items: center; }
+    .thumb { width: 88px; height: 88px; flex: none; border-radius: 8px; border: 1px solid var(--line); background: #eef0e6 center/cover no-repeat; display: flex; align-items: center; justify-content: center; text-align: center; font-size: .62rem; color: var(--ink-soft); padding: 4px; }
+    .imgctrl { display: flex; flex-direction: column; gap: .45rem; align-items: flex-start; }
+    .imgctrl input[type="file"] { font-size: .82rem; max-width: 100%; }
+    .imgreset { padding: .3rem .85rem; font-size: .8rem; }
+    .imgstatus { font-size: .78rem; color: var(--ink-soft); }
+    /* Preview/staging password gate (static hosts only) */
+    .pwform { display: flex; flex-direction: column; gap: .7rem; align-items: center; margin-top: 1.2rem; }
+    .pwinput { font: inherit; font-size: 1rem; padding: .6rem .85rem; border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--ink); width: min(260px, 80vw); text-align: center; }
+    .pwinput:focus { outline: 2px solid var(--clay); outline-offset: 1px; border-color: var(--clay); }
+    [data-pwerror] { color: var(--clay-ink); min-height: 1.1em; font-size: .85rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🌱 The Plant PT — Admin</h1>
+    <span class="who" data-who>…</span>
+  </header>
+
+  <main>
+    <!-- Preview/staging password gate. Shown only on a static host with no login
+         backend (the GitHub preview, a plain local server, or an opened file). This
+         is a cosmetic lock — the live site is protected by Cloudflare Access. -->
+    <section class="gate card" data-pwgate hidden>
+      <h2>The Plant PT — Admin</h2>
+      <p class="muted">Enter the preview password to open the admin.</p>
+      <form class="pwform" data-pwform>
+        <input class="pwinput" data-pwinput type="password" placeholder="Preview password"
+               autocomplete="current-password" aria-label="Preview password" />
+        <button class="btn" type="submit">Open admin</button>
+        <div class="muted" data-pwerror aria-live="polite"></div>
+      </form>
+      <p class="muted" style="margin-top:1.4rem; font-size:.8rem;">Temporary staging lock. The live
+        site will use a secure email-code login tied to Joe's own account.</p>
+    </section>
+
+    <!-- Shown if the visitor isn't an authenticated admin -->
+    <section class="gate card" data-gate hidden>
+      <h2>Not signed in</h2>
+      <p class="muted">This area is for The Plant PT admin only. You'll reach it through a secure
+        login — a one-time code sent to your email.</p>
+    </section>
+
+    <!-- The dashboard (only populated for an authenticated admin) -->
+    <div data-dash hidden>
+      <section class="card">
+        <div class="row">
+          <h2>Customer enquiries <span class="muted" data-count></span></h2>
+          <a class="btn" href="/admin/api/leads?format=csv">⬇ Download CSV</a>
+        </div>
+        <div data-leads><p class="empty">Loading…</p></div>
+      </section>
+
+      <section class="card" data-content-card>
+        <div class="row">
+          <h2>Site text</h2>
+          <button class="btn" type="button" data-content-save>Save changes</button>
+        </div>
+        <p class="muted">Edit any wording below and hit <strong>Save changes</strong>. Clear a box to
+          restore the original text. Changes go live on the site within about a minute.</p>
+        <div data-content><p class="empty">Loading…</p></div>
+        <div class="row" style="justify-content:flex-end; margin-top:1rem;">
+          <span class="muted" data-content-status aria-live="polite"></span>
+          <button class="btn" type="button" data-content-save>Save changes</button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="content-fields.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
