@@ -32,6 +32,18 @@ const PREVIEW_PASSWORD = "plantpt2026";      // staging only — visible in page
 const PREVIEW_STORE = "ppt_preview_content"; // localStorage key shared with js/content.js
 let PREVIEW = false;
 
+// Friendly headings for each page's fields (the registry groups carry a `page`).
+const PAGE_LABELS = {
+  "index.html": "Home page",
+  "the-plant-prep.html": "Plant Prep menu page",
+  "meal-plans/index.html": "Meal plans library",
+};
+
+// The saved value of a field: a toggle reports on/off, everything else its text.
+function fieldValue(input) {
+  return input.dataset.type === "toggle" ? (input.checked ? "on" : "") : input.value;
+}
+
 function isStaticHost() {
   return location.hostname.endsWith("github.io") || location.protocol === "file:";
 }
@@ -171,7 +183,20 @@ async function loadContent() {
   const [defaults, overrides] = await Promise.all([loadDefaults(), loadOverrides()]);
 
   wrap.textContent = "";
+  const pages = Array.from(new Set(window.CONTENT_FIELDS.map((g) => g.page || "index.html")));
+  const multiPage = pages.length > 1;
+  let lastPage = null;
+
   window.CONTENT_FIELDS.forEach((group, gi) => {
+    const page = group.page || "index.html";
+    if (multiPage && page !== lastPage) {
+      const banner = document.createElement("p");
+      banner.className = "cpage";
+      banner.textContent = PAGE_LABELS[page] || page;
+      wrap.appendChild(banner);
+      lastPage = page;
+    }
+
     const sec = document.createElement("details");
     sec.className = "cgroup";
     if (gi === 0) sec.open = true; // first group expanded, rest collapsed
@@ -181,7 +206,8 @@ async function loadContent() {
 
     group.fields.forEach((f) => {
       if (f.type === "image") { sec.appendChild(buildImageField(f, overrides[f.key])); return; }
-      const def = defaults[f.key] || "";
+      if (f.type === "toggle") { sec.appendChild(buildToggleField(f, overrides[f.key])); return; }
+      const def = defaults[f.key] != null ? defaults[f.key] : (f.def || "");
       const ov = overrides[f.key];
       const current = ov && ov.value != null ? ov.value : def;
 
@@ -313,23 +339,59 @@ function buildImageField(f, ov) {
   return field;
 }
 
-/* The page's own HTML is the source of truth for default copy: fetch it and read
-   each [data-key]'s text. Fetched HTML carries the baked-in defaults (overrides are
-   applied in the browser, not in the source), so this is exactly the default set. */
-async function loadDefaults() {
-  try {
-    // Relative so it resolves on the live site (/index.html), a local server, and
-    // the GitHub project preview (/<repo>/index.html) alike.
-    const html = await (await fetch("../index.html")).text();
-    const doc = new DOMParser().parseFromString(html, "text/html");
-    const map = {};
-    doc.querySelectorAll("[data-key]").forEach((el) => {
-      map[el.getAttribute("data-key")] = el.textContent.trim();
-    });
-    return map;
-  } catch {
-    return {};
+/* A simple on/off switch — e.g. reveal a section that ships hidden. Saves "on" / ""
+   (off is the default, so an empty/absent value keeps the section hidden). */
+function buildToggleField(f, ov) {
+  const on = ov && ov.value != null ? String(ov.value).toLowerCase() === "on" : false;
+
+  const field = document.createElement("div");
+  field.className = "cfield cfield--toggle";
+
+  const label = document.createElement("label");
+  label.className = "toggle";
+  const input = document.createElement("input");
+  input.type = "checkbox";
+  input.checked = on;
+  input.dataset.key = f.key;
+  input.dataset.type = "toggle";
+  input.dataset.def = ""; // default = off
+  input.dataset.original = on ? "on" : "";
+  const text = document.createElement("span");
+  text.textContent = f.label;
+  label.appendChild(input);
+  label.appendChild(text);
+  input.addEventListener("change", () => {
+    field.classList.toggle("is-dirty", (input.checked ? "on" : "") !== input.dataset.original);
+  });
+
+  field.appendChild(label);
+  if (f.hint) {
+    const hint = document.createElement("p");
+    hint.className = "chint";
+    hint.textContent = f.hint;
+    field.appendChild(hint);
   }
+  return field;
+}
+
+/* The pages' own HTML is the source of truth for default copy: fetch each page named
+   in the registry and read its [data-key] text. Relative paths resolve on the live
+   site, a local server, and the GitHub project preview alike. Keys are unique across
+   pages, so the results merge into one map. */
+async function loadDefaults() {
+  const pages = Array.from(new Set((window.CONTENT_FIELDS || []).map((g) => g.page || "index.html")));
+  const map = {};
+  await Promise.all(pages.map(async (page) => {
+    try {
+      const html = await (await fetch("../" + page)).text();
+      const doc = new DOMParser().parseFromString(html, "text/html");
+      doc.querySelectorAll("[data-key]").forEach((el) => {
+        const k = el.getAttribute("data-key");
+        if (map[k] == null) map[k] = el.textContent.trim();
+      });
+    } catch { /* page unreachable — its fields just show no baked-in default */ }
+  }));
+  return map;
 }
 
 async function loadOverrides() {
@@ -352,9 +414,11 @@ async function saveContent() {
 
   const updates = [];
   inputs.forEach((input) => {
-    if (input.value === input.dataset.original) return; // untouched
+    const cur = fieldValue(input);
+    if (cur === input.dataset.original) return; // untouched
     // Back to default → send "" so the server drops the override (restores default).
-    const value = input.value.trim() === input.dataset.def.trim() ? "" : input.value;
+    const def = input.dataset.def || "";
+    const value = cur.trim() === def.trim() ? "" : cur;
     updates.push({ key: input.dataset.key, value: value, type: input.dataset.type || "text" });
   });
 
@@ -373,7 +437,7 @@ async function saveContent() {
       });
       localStorage.setItem(PREVIEW_STORE, JSON.stringify(store));
       inputs.forEach((input) => {
-        input.dataset.original = input.value;
+        input.dataset.original = fieldValue(input);
         const cf = input.closest(".cfield");
         if (cf) cf.classList.remove("is-dirty");
       });
@@ -394,8 +458,9 @@ async function saveContent() {
     });
     if (!res.ok) throw new Error("HTTP " + res.status);
     inputs.forEach((input) => {
-      input.dataset.original = input.value; // commit new baseline
-      input.closest(".cfield").classList.remove("is-dirty");
+      input.dataset.original = fieldValue(input); // commit new baseline
+      const cf = input.closest(".cfield");
+      if (cf) cf.classList.remove("is-dirty");
     });
     status.textContent = `Saved ${updates.length} change${updates.length > 1 ? "s" : ""} — live shortly.`;
   } catch {
